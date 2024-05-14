@@ -1,0 +1,164 @@
+body {
+  background-image: url(imagens/planodefundo.png);
+  background-attachment: fixed;
+  font-family: "Exo", sans-serif;
+}
+
+header {
+	height: 100px;
+	width: 100%;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .header-title {
+    font-family: 'Fascinate Inline', system-ui;
+    color: black;
+    font-size: 36px;
+    margin-right: 0px;
+  }
+  
+  .header-logo {
+    height: 60px;
+    width: 60px;
+    align-self: center;
+    margin-left: 0px;
+  }
+  
+  .header-logo img {
+    height: 100%;
+    width: 100%;
+  }
+
+.section-text {
+	padding: 30px;
+	text-align: center;
+}
+
+.section-text h3 {
+	font-size: 36px;
+	font-weight: bold;
+	margin-bottom: 20px;
+  color: black;
+}
+
+.section-text p {
+	font-size: 18px;
+	line-height: 1.5;
+	margin-bottom: 10px;
+  text-align: left;
+  color: black;
+}
+
+.section-text h4 {
+	font-size: 22px;
+	line-height: 1.5;
+	margin-bottom: 10px;
+  text-align: left;
+  color: black;
+}
+
+.section-video {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 30px auto;
+	text-align: center;
+}
+
+.section-video iframe {
+	border: none;
+	width: calc(50% - 15px);
+	margin: 0 7.5px 15px 7.5px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+@media (max-width: 600px) {
+	.section-video iframe {
+		width: 90%;
+	}
+}
+
+.fascinate-inline-regular {
+    font-family: "Fascinate Inline", system-ui;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.exo {
+  font-family: "Exo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.app-icon-container {
+    position: static;
+    bottom: -30px;
+    left: 25%;
+    transform: translateX(-50%);
+  }
+  
+.app-icon {
+    width: 50px;
+    height: 50px;
+}
+
+.section-links{
+  text-align: left;
+}
+
+.texto-apps{
+  font-size: 18px;
+	line-height: 1.5;
+	margin-bottom: 10px;
+  margin-left: 25px;
+  text-align: left;
+  color: black;
+}
+
+.box_1{
+  width: 450px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+}
+
+.box_2{
+  width: 450px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 10px;
+}
+
+.box_3{
+  width: 450px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 0px;
+}
+
+h5{
+  font-size: 16px;
+  margin-bottom: 0px;
+}
+
+a{
+  margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+  

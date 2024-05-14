@@ -1,0 +1,151 @@
+
+*{
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+  }
+  body {
+    background-image: url(imagens/planodefundo.png);
+    background-attachment: fixed;
+    font-family: "Exo", sans-serif;
+    position: relative;
+    z-index: -2;
+  }
+  
+  header {
+      height: 70px;
+      width: 100%;
+      background-color: white;
+      
+  }
+  
+  .header-content {
+      display: flex;
+      justify-content:space-between;
+      align-items: center;
+      min-width: 100%;
+    }
+    
+    .header-title {
+      font-family: 'Fascinate Inline', system-ui;
+      color: black;
+      font-size: 36px;
+    }
+    
+    .header-logo {
+      height: 60px;
+      width: 60px;
+      align-self: center;
+      margin-left: 10px;
+      margin-right: 20px;
+    }
+    
+    .header-logo img {
+      height: 100%;
+      width: 100%;
+    }
+  
+    .menu{
+        display: flex;
+        margin-left: auto;     
+    }
+  
+    h2{
+        font-size: 18px;
+        margin-right: 10px;
+    }
+  
+  .section-text {
+      padding: 30px;
+      text-align: center;
+  }
+  
+  .section-text h3 {
+      font-size: 36px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    color: black;
+  }
+  
+  .section-text p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 0 px;
+    text-align: left;
+    color: black;
+  }
+  
+  .section-text h4 {
+      font-size: 22px;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    text-align: left;
+    color: black;
+  }
+  
+  
+  .fascinate-inline-regular {
+      font-family: "Fascinate Inline", system-ui;
+      font-weight: 400;
+      font-style: normal;
+  }
+  
+  .exo {
+    font-family: "Exo", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+
+  
+  h5{
+    font-size: 16px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    text-align: left;
+  }
+  
+  a{
+    margin-right: 10px;
+    margin-left: 20px;
+  }
+
+  .diario {
+    position: absolute;
+    top: 100px;
+    left: 350px;
+    width: 60%;
+    
+    
+  }
+
+  .texto-diario {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 500px;
+    height: 300px;
+    border: 1px solid black;
+    overflow: auto;
+      ;
+  }
+
+  .entrada {
+    position: absolute;
+    top: 260px;
+    left: 620px;
+    width: 400px;
+    height: 500px;
+      background-color: transparent;
+      font-size: 18px;
+      cursor: text;
+      
+
+  }
+
+ 
+
+
+
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pop Up</title>
+    <link rel="stylesheet" href="style_popup.css">
+</head>
+<body onload="openPopup()">
+    
+    <div id="popup" class="popup">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h2 class="popup-title">Como está se sentindo hoje?</h2>
+        <div class="emojis">
+            <div class="emoji" id="emoji-1" onclick="selectEmoji('emoji-1')"><img src="imagens/irritado.jpeg" alt="Irritado(a)"> <span>Irritado(a)</span></div>
+            <div class="emoji" id="emoji-2" onclick="selectEmoji('emoji-2')"><img src="imagens/muito triste.jpeg" alt="Muito triste"> <span>Muito triste</span></div>
+            <div class="emoji" id="emoji-3" onclick="selectEmoji('emoji-3')"><img src="imagens/triste.jpeg" alt="Triste"> <span>Triste</span></div>
+            <div class="emoji" id="emoji-4" onclick="selectEmoji('emoji-4')"><img src="imagens/neutro.jpeg" alt="Neutro"> <span>Neutro</span></div>
+            <div class="emoji" id="emoji-5" onclick="selectEmoji('emoji-5')"><img src="imagens/animado.jpeg" alt="Animado"> <span>Animado</span></div>
+            <div class="emoji" id="emoji-6" onclick="selectEmoji('emoji-6')"><img src="imagens/feliz.jpeg" alt="Feliz"> <span>Feliz</span></div>
+        </div>
+        <p class="question">Quer compartilhar sobre o seu dia?</p>
+        <div class="buttons">
+            <button class="button-yes"id="button-yes">Sim</button>
+            <button class="button-no"onclick="handleNo()">Não</button>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

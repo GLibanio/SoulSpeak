@@ -1,0 +1,62 @@
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.popup-title {
+    margin-top: 0;
+}
+
+.emojis {
+    margin-bottom: 20px;
+}
+
+.emojis .emoji {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.emojis .emoji span {
+    display: block;
+    font-size: 12px;
+}
+
+.question {
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons .button-yes {
+    color: white;
+    background-color: green;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+}
+
+.buttons .button-no {
+    color: white;
+    background-color: red;
+    border: none;
+    padding: 10px 20px;
+}

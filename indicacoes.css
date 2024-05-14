@@ -1,0 +1,212 @@
+
+*{
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+body {
+    /*background-image: linear-gradient(to bottom, #57BBBF 40%, white);*/
+    background-image: url(imagens/planodefundo.png);
+    background-attachment: fixed;
+    font-family: "Exo", sans-serif;
+  }
+  
+  header {
+      height: 70px;
+      width: 100%;
+      background-color: white;
+      
+  }
+  
+  .header-content {
+      display: flex;
+      justify-content:left;
+      align-items: center;
+      min-width: 100%;
+    }
+    
+    .header-title {
+      font-family: 'Fascinate Inline', system-ui;
+      color: black;
+      font-size: 36px;
+    }
+    
+    .header-logo {
+      height: 60px;
+      width: 60px;
+      align-self: center;
+      margin-left: 10px;
+      margin-right: 20px;
+    }
+    
+    .header-logo img {
+      height: 100%;
+      width: 100%;
+    }
+
+    .menu{
+        display: inline-flex;
+        margin-left: auto;     
+    }
+
+    h2{
+        font-size: 18px;
+        margin-right: 10px;
+    }
+    
+  
+    p {
+        font-size: 15px;
+        line-height: 1.5;
+        padding: 10px;
+        margin-top: 40px;
+        margin-bottom: 10px;
+    }
+  
+    .section-text{
+        font-size: 30px;
+        line-height: 1.5;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        text-align: center;
+        color: teal;
+    }
+  
+    .fascinate-inline-regular {
+        font-family: "Fascinate Inline", system-ui;
+        font-weight: 400;
+        font-style: normal;
+    }
+  
+    .exo {
+        font-family: "Exo", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 100;
+        font-style: normal;
+    }
+  
+    .section-boxes{
+        text-align: left;
+        margin-left: 90px;
+    }
+
+    .box_1{
+        width: 400px;
+        height: 400px;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 10px;
+        margin-right: 10px;
+        border-radius: 20px;
+        background-color: white;
+        text-align: center;
+        background-image: url(imagens/exercicio.jpg);
+        background-size: 150px;
+        background-repeat: no-repeat;
+        background-position: center 170px;
+        box-shadow: 5px 5px teal;
+        
+    }
+  
+    .box_2{
+        width: 400px;
+        height: 400px;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 10px;
+        margin-right: 10px;
+        background-color: white;
+        border-radius: 20px;
+        text-align: center;
+        background-image: url(imagens/beberagua.jpg);
+        background-size: 150px;
+        background-repeat: no-repeat;
+        background-position: center 170px;
+        box-shadow: 5px 5px teal;
+    }
+    
+    .box_3{
+        width: 400px;
+        height: 400px;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 10px;
+        margin-right: 10px;
+        background-color: white;
+        border-radius: 20px;
+        text-align: center;
+        background-image: url(imagens/dieta.jpg);
+        background-size: 150px;
+        background-repeat: no-repeat;
+        background-position: center 180px;
+        box-shadow: 5px 5px teal;
+    }
+
+    .box_4{
+        width: 400px;
+        height: 400px;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 10px;
+        margin-right: 10px;
+        background-color: white;
+        border-radius: 20px;
+        text-align: center;
+        background-image: url(imagens/lazer.jpg);
+        background-size: 200px;
+        background-repeat: no-repeat;
+        background-position: center 200px;
+        box-shadow: 5px 5px teal;
+    }
+
+    .box_5{
+        width: 400px;
+        height: 400px;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 10px;
+        margin-right: 10px;
+        background-color: white;
+        border-radius: 20px;
+        text-align: center;
+        background-image: url(imagens/interacaosocial.png);
+        background-size: 150px;
+        background-repeat: no-repeat;
+        background-position: center 180px;
+        box-shadow: 5px 5px teal;
+    }
+
+    .box_6{
+        width: 400px;
+        height: 400px;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 10px;
+        margin-right: 10px;
+        background-color: white;
+        border-radius: 20px;
+        text-align: center;
+        background-image: url(imagens/sono.png);
+        background-size: 170px;
+        background-repeat: no-repeat;
+        background-position: center 180px;
+        box-shadow: 5px 5px teal;
+    }
+
+    h4{
+        padding-top: 20px;
+        font-size: 18px;
+    }
+    
+    h5{
+        font-size: 16px;
+        margin-bottom: 0px;
+    }
+    
+    a{
+        margin-right: 10px;
+    }
+
+  footer{
+    padding-top: 20px;
+  }
