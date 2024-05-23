@@ -26,7 +26,7 @@ body {
     }
     
     .header-title {
-      font-family: 'Fascinate Inline', system-ui;
+      font-family: "Exo", system-ui;
       color: black;
       font-size: 36px;
     }
@@ -72,8 +72,8 @@ body {
         color: teal;
     }
   
-    .fascinate-inline-regular {
-        font-family: "Fascinate Inline", system-ui;
+    .exo-title{
+        font-family: "Exo", system-ui;
         font-weight: 400;
         font-style: normal;
     }
