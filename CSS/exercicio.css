@@ -9,15 +9,13 @@ body {
   background-image: url(imagens/planodefundo.png);
   background-attachment: fixed;
   font-family: "Exo", sans-serif;
-  position: relative;
-  z-index: -1;
 }
 
 header {
     height: 70px;
     width: 100%;
     background-color: white;
-    z-index: 2;
+    
 }
 
 .header-content {
@@ -25,14 +23,12 @@ header {
     justify-content:left;
     align-items: center;
     min-width: 100%;
-    
   }
   
   .header-title {
-    font-family: 'Fascinate Inline', system-ui;
+    font-family: "Exo", system-ui;
     color: black;
     font-size: 36px;
-    
   }
   
   .header-logo {
@@ -41,18 +37,24 @@ header {
     align-self: center;
     margin-left: 10px;
     margin-right: 20px;
-    
   }
   
   .header-logo img {
     height: 100%;
     width: 100%;
-    
   }
 
   .menu{
       display: inline-flex;
       margin-left: auto;     
+  }
+
+  .btn_menu{
+      font-size: 18px;
+      margin-right: 40px;
+      background-color: white;
+      border: 3px black;
+      border-radius: 25px;
   }
 
   h2{
@@ -116,16 +118,16 @@ header {
 	}
 }
 
-.fascinate-inline-regular {
-    font-family: "Fascinate Inline", system-ui;
-    font-weight: 400;
-    font-style: normal;
-}
-
 .exo {
   font-family: "Exo", sans-serif;
   font-optical-sizing: auto;
   font-weight: 100;
+  font-style: normal;
+}
+
+.exo-title{
+  font-family: "Exo", system-ui;
+  font-weight: 400;
   font-style: normal;
 }
 

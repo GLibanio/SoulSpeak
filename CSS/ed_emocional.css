@@ -1,0 +1,115 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+body {
+  /*background-image: linear-gradient(to bottom, #57BBBF 40%, white);*/
+  background-image: url(imagens/planodefundo.png);
+  background-attachment: fixed;
+  font-family: "Exo", sans-serif;
+}
+
+header {
+    height: 70px;
+    width: 100%;
+    background-color: white;
+    
+}
+
+.header-content {
+    display: flex;
+    justify-content:left;
+    align-items: center;
+    min-width: 100%;
+  }
+  
+  .header-title {
+    font-family: "Exo", system-ui;
+    color: black;
+    font-size: 36px;
+  }
+  
+  .header-logo {
+    height: 60px;
+    width: 60px;
+    align-self: center;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+  
+  .header-logo img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .menu{
+      display: inline-flex;
+      margin-left: auto;     
+  }
+
+  .btn_menu{
+      font-size: 18px;
+      margin-right: 40px;
+      background-color: white;
+      border: 3px black;
+      border-radius: 25px;
+  }
+
+  .exo-title{
+      font-family: "Exo", system-ui;
+      font-weight: 400;
+      font-style: normal;
+  }
+
+  .section-boxes{
+    text-align: left;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 10px;
+    margin-top: 100px;
+    margin-right: 10px;
+}
+
+.box_1{
+    width: 400px;
+    height: 725px;
+    vertical-align: top;
+    border-radius: 20px;
+    background-color: white;
+    text-align: center;
+    background-size: 150px;
+    background-repeat: no-repeat;
+    background-position: center 170px;
+    box-shadow: 5px 5px teal;
+    
+}
+
+a{
+  margin: 60px 0px 0px 0px;
+}
+
+h2{
+  padding-top: 35px;
+  font-size: 25px;
+}
+
+h5{
+  font-size: 16px;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.5;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.img_box {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0px 40px 55px;
+  max-width: 300px;
+}

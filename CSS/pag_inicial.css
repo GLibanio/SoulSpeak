@@ -99,17 +99,27 @@ body {
 
     .btn{
         font-family: "Exo", system-ui;
-        font-size: 15.5px;
-        font-weight: 110;
-        color: white;
-        background-color: black;
-        border: 3px white;
         width: 153.78px;
         height: 40px;
-        border-radius: 8.89px;
         margin: 1.5% 0% 0% 0%;
+        font-size: 18px;
+        border: none;
+        outline: none;
+        background-color: #151515;
+        color: #eee;
+        border-radius: 7px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.25s ease-out;
+      }
 
-    }
+      .btn:hover {
+        transform: translateY(-3px);
+      }
+      
+          
+
+
 
     .inform_box {
         background-color: white;

@@ -1,5 +1,5 @@
 // metodo login
-const API_URL = '#';
+const API_URL = 'https://66577c2c5c3617052644fefa.mockapi.io/apiv1/users';
 
 async function login(email, senha) {
     try {

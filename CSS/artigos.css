@@ -1,0 +1,63 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+body {
+    /*background-image: linear-gradient(to bottom, #57BBBF 40%, white);*/
+    background-image: url(imagens/planodefundo.png);
+    background-attachment: fixed;
+    font-family: "Exo", sans-serif;
+  }
+  
+  header {
+      height: 70px;
+      width: 100%;
+      background-color: white;
+      
+  }
+  
+  .header-content {
+      display: flex;
+      justify-content:left;
+      align-items: center;
+      min-width: 100%;
+    }
+    
+    .header-title {
+      font-family: "Exo", system-ui;
+      color: black;
+      font-size: 36px;
+    }
+    
+    .header-logo {
+      height: 60px;
+      width: 60px;
+      align-self: center;
+      margin-left: 10px;
+      margin-right: 20px;
+    }
+    
+    .header-logo img {
+      height: 100%;
+      width: 100%;
+    }
+
+    .menu{
+        display: inline-flex;
+        margin-left: auto;     
+    }
+
+    .btn_menu{
+        font-size: 18px;
+        margin-right: 40px;
+        background-color: white;
+        border: 3px black;
+        border-radius: 25px;
+    }
+
+    .exo-title{
+        font-family: "Exo", system-ui;
+        font-weight: 400;
+        font-style: normal;
+    }
