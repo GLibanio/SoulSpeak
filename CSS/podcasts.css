@@ -61,3 +61,16 @@ body {
         font-weight: 400;
         font-style: normal;
     }
+    
+    .h1_main {
+      margin: 2% 0% 2% 5%;
+      font-size: 36px;
+    }
+
+    p {
+      margin: 0% 5% 2% 5%;
+    }
+
+    iframe {
+      margin: 0% 5% 2% 5%;
+    }

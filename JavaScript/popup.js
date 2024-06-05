@@ -14,9 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
     closePopup();
 }
   function saveAndClose() {
+
+    var userInput = document.getElementById('user-input').value;
     
     closePopup();
   }
+
   function selectEmoji(emojiId) {
     
     var selectedEmoji = document.getElementById(emojiId);

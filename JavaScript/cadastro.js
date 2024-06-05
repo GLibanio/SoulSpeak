@@ -1,4 +1,15 @@
 
+
+// class cadastrado extends Usuario {
+    
+//     constructor(nome, email, senha) {
+//         super(nome, email, senha)
+//         this.nome = nome;
+//         this.email = email;
+//         this.senha = senha;
+//       }
+
+// cadastrar() {
  document.getElementById("Pessoa-form").addEventListener("submit", function (event) {
      event.preventDefault();
 
@@ -30,3 +41,5 @@
          alert('Erro ao cadastrar o usuario. Por favor, tente novamente.');
      });
  });
+// }
+// }

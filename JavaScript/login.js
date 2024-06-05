@@ -1,4 +1,14 @@
-// metodo login
+
+
+// class login extends Usuario {
+
+//     constructor(email, senha) {
+//         this.email = email;
+//         this.senha = senha;
+//       }
+
+// autenticar() {
+      
 const API_URL = 'https://66577c2c5c3617052644fefa.mockapi.io/apiv1/users';
 
 async function login(email, senha) {
@@ -29,3 +39,5 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
     login(email, senha);
 });
 
+//       }
+// }

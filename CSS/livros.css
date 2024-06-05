@@ -61,3 +61,26 @@ body {
         font-weight: 400;
         font-style: normal;
     }
+
+    .h1_main {
+      margin: 0% 0% 2% 5%;
+      font-size: 40px;
+    }
+
+    p {
+      margin: 0% 5% 0% 5%;
+    }
+
+    .livros{
+      display: flex;
+      flex-direction: row;
+    }
+
+    .liv_txt{
+      margin: 5% 0% 0% 0%;
+      flex-direction: column;
+    }
+
+    iframe {
+      margin: 3% 5% 2% 10%;
+    }
