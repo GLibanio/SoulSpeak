@@ -12,6 +12,69 @@ body {
     font-family: "Exo", sans-serif;
 }
 
+header {
+    height: 70px;
+    width: 100%;
+    background-color: white;
+    
+}
+
+.header-content {
+    display: flex;
+    justify-content:left;
+    align-items: center;
+    min-width: 100%;
+  }
+  
+  .header-title {
+    font-family: "Exo", system-ui;
+    color: black;
+    font-size: 36px;
+  }
+  
+  .header-logo {
+    height: 60px;
+    width: 60px;
+    align-self: center;
+    margin-left: 10px;
+    margin-right: 20px;
+  }
+  
+  .header-logo img {
+    height: 100%;
+    width: 100%;
+  }
+
+  .menu{
+      display: inline-flex;
+      margin-left: auto;     
+  }
+
+
+  .btn_menu{
+    cursor: pointer;
+    color: black;
+      font-size: 18px;
+      margin-right: 40px;
+      background-color: white;
+      border: 1px solid black;
+      border-radius: 25px;
+  }
+
+
+  .exo-title{
+      font-family: "Exo", system-ui;
+      font-weight: 400;
+      font-style: normal;
+  }
+
+  .exo {
+      font-family: "Exo", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 100;
+      font-style: normal;
+  }
+
 .container_cadastro {
     display: flex;
     flex-direction: column;
@@ -33,8 +96,8 @@ input{
     height: 40px;
     top: 406.22px;
     border-radius: 8.89px; 
-    border: 10px black;
-    margin: 3% 0% 1.5% 0%;
+    border: 1px solid black;
+    margin: 4% 0% 1.5% 0%;
     
 }
 
@@ -49,4 +112,13 @@ button {
     height: 40px;
     border-radius: 8.89px;
     margin: 2% 0% 0% 23%;
+}
+
+.h2_cad{
+    margin: 3% 0% 1.5% 0%;
+}
+
+
+.p_cad{
+    margin: 3% 0% 1.5% 0%;
 }

@@ -11,8 +11,20 @@
     <title>Cadastro</title>
 </head>
 <body>
+    <header>
+		<div class="header-content">
+			<div class="header-logo">
+				<img src="CSS/imagens/logo.png" alt="Site Logo">
+	        </div>
+			<h1 class="header-title exo-title">SoulSpeak</h1>
+			<nav class="exo menu">
+                <button class="btn_menu" onclick="window.location.href='index.html'">Voltar</button>
+			</nav>
+		</div>
+	</header>
+    
     <div class="container_cadastro">
-        <h2>Cadastrar</h2>
+        <h2 class="h2_cad">Cadastrar</h2>
 
         <form id="Pessoa-form">
             <input class="cadastroNome" type="text" id="nome" name="nome" required placeholder=" Nome"><br><br>
@@ -24,7 +36,7 @@
             <button class="button" type="submit">CADASTRAR</button>
 
         </form>
-
+        <p class="p_cad"> Já possui cadastro? <a href="login.html">Entre</a></p>
     </div>
 
     

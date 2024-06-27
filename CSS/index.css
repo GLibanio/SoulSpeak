@@ -53,6 +53,7 @@ body {
 
 
     .btn_menu{
+        cursor: pointer;
         font-size: 18px;
         margin-right: 40px;
         background-color: white;

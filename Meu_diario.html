@@ -6,6 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Fascinate+Inline&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"> 
 </head>
 <body>
 	<header>
@@ -32,13 +33,43 @@
 			<h3>Momento desabafo</h3>
         </section>
 
-        <section class="sec_diario">
+        <!-- <section class="sec_diario">
             <div id="caderno"></div>
                 <img class="diario" src="CSS/imagens/diario.png" alt="Caderno com linhas" id="diario" >
                 <textarea class="texto" id="texto"></textarea>
             </div>
             <button class="button" type="submit">Salvar</button>
-        </section>
+        </section> -->
+
+        <div class="popup-box">
+            <div class="popup">
+              <div class="content">
+                <header class="header_popup">
+                  <p></p>
+                  <i class="uil uil-times"></i>
+                </header>
+                <form action="#">
+                  <div class="row title">
+                    <label>Titulo</label>
+                    <input type="text" spellcheck="false">
+                  </div>
+                  <div class="row description">
+                    <label>Descrição</label>
+                    <textarea spellcheck="false"></textarea>
+                  </div>
+                  <button></button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="wrapper">
+            <img src="CSS/imagens/diario.png" alt="diario" class="diario">
+            <li class="add-box">
+              <div class="icon"><i class="uil uil-plus"></i></div>
+              <p>Escreva Aqui</p>
+            </li>
+          </div>
+      
 
         <script src="JavaScript/meu_diario.js"></script>
 

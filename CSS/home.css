@@ -54,7 +54,7 @@ body {
     .menu{
         display: inline-flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: space-around;
         align-items: center;
         margin-left: auto; 
         height: auto;

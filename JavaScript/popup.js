@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
 }
   function saveAndClose() {
 
-    var userInput = document.getElementById('user-input').value;
+    // var userInput = document.getElementById('user-input').value;
     
     closePopup();
   }
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var selectedEmoji = document.getElementById(emojiId);
 
     
-    selectedEmoji.style.backgroundColor = "Green";
+    selectedEmoji.style.backgroundColor = "lightgreen";
 
     
 }

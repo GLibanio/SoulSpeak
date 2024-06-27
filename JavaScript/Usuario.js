@@ -1,17 +1,18 @@
-class Usuario {
-    constructor(id, nome, email, senha) {
-      this.id = id;
-      this.nome = nome;
-      this.email = email;
-      this.senha = senha;
-    }
+// class Usuario {
+//     constructor(id, nome, email, senha) {
+//       this.id = id;
+//       this.nome = nome;
+//       this.email = email;
+//       this.senha = senha;
+//     }
   
-    cadastrar(){
-        abstract;
-    }
+//    function cadastrar() {
+//     abstract;
+//    } 
 
-    autenticar() {
-      abstract; 
-    }
 
-  }
+//    function autenticar() {
+//       abstract; 
+//     }
+
+//   }
