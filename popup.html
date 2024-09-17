@@ -14,12 +14,12 @@
 	        </div>
 			<h1 class="header-title exo-title">SoulSpeak</h1>
 			<nav class="exo menu">
-				<button class="btn_menu" onclick="window.location.href='home.html'">Home</button>
-				<button class="btn_menu" onclick="window.location.href='ed_emocional.html'"> Educação Emocional </button>
-				<button class="btn_menu" onclick="window.location.href='indicacoes.html'"> Indicações </button>
-				<button class="btn_menu" onclick="window.location.href='popup.html'"> Sentimento do dia </button>
-				<button class="btn_menu" onclick="window.location.href='meu_diario.html'"> Meu diário </button>
-				<button class="btn_menu" onclick="window.location.href='pontos.html'"> Meus pontos </button>
+				<button class="btn_menu" onclick="window.location='home.html'">Home</button>
+				<button class="btn_menu" onclick="window.location='ed_emocional.html'"> Educação Emocional </button>
+				<button class="btn_menu" onclick="window.location='indicacoes.html'"> Indicações </button>
+				<button class="btn_menu" onclick="window.location='popup.html'"> Sentimento do dia </button>
+				<button class="btn_menu" onclick="window.location='meu_diario.html'"> Meu diário </button>
+				<button class="btn_menu" onclick="window.location='pontos.html'"> Meus pontos </button>
 				
 			</nav>
 			
@@ -27,7 +27,7 @@
     </header>
        
     <div id="popup" class="popup">
-        <span class="close" onclick="closePopup(), window.location.href='home.html'">&times;</span>
+        <span class="close" onclick="closePopup(), window.location='home.html'">&times;</span>
         <h2 class="popup-title">Como está se sentindo hoje?</h2>
         <div class="emojis">
             <div class="emoji" id="emoji-1" onclick="selectEmoji('emoji-1')"><img src="CSS/imagens/irritado.jpeg" alt="Irritado(a)"> <span>Irritado(a)</span></div>
@@ -39,8 +39,8 @@
         </div>
         <p class="question">Quer compartilhar sobre o seu dia?</p>
         <div class="buttons">
-            <button class="button-yes"id="button-yes" onclick="saveAndClose(), window.location.href='meu_diario.html'">Sim</button>
-            <button class="button-no"onclick="handleNo(), window.location.href='home.html'">Não</button>
+            <button class="button-yes"id="button-yes" onclick="saveAndClose(), window.location='meu_diario.html'">Sim</button>
+            <button class="button-no"onclick="handleNo(), window.location='home.html'">Não</button>
     </div>
 
     <script src="JavaScript/popup.js"></script>

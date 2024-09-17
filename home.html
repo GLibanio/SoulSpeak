@@ -1,83 +1,180 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CSS/home.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Fascinate+Inline&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="CSS/home.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Fascinate+Inline&display=swap"
+      rel="stylesheet"
+    />
     <title>Home</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-		<div class="header-content">
-			<h1 class="header-title exo-title">SoulSpeak</h1>
-			<div class="header-logo">
-				<img src="CSS/imagens/logo.png" alt="Site Logo">
-	        </div>
-		</div>
-	</header>
+      <div class="header-content">
+        <h1 class="header-title exo-title">SoulSpeak</h1>
+        <div class="header-logo">
+          <img src="CSS/imagens/logo.png" alt="Site Logo" />
+        </div>
+      </div>
+    </header>
 
-<main>
-	<section>
-	<nav class="exo menu">
-		<button class="btn_menu" onclick="window.location.href='meu_diario.html'"><b> Meu diário </b></button>
-		<button class="btn_menu" onclick="window.location.href='ed_emocional.html'"><b> Educação Emocional </b></button>
-		<button class="btn_menu" onclick="window.location.href='indicacoes.html'"><b> Indicações </b></button>
-		<button class="btn_menu" onclick="window.location.href='popup.html'"><b> Sentimento do dia </b></button>
-		<button class="btn_menu" onclick="window.location.href='pontos.html'"><b> Meus pontos </b></button>
-		<button class="btn_menu" onclick="window.location.href='index.html'"><b>Sair</b></button>
-	</nav>
+    <main>
+      <section>
+        <nav class="exo menu">
+          <div class="hamburger" onclick="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+          <div id="menuItems" class="menu-items">
+            <button
+              class="btn_menu"
+              onclick="window.location='meu_diario.html'"
+            >
+              <b> Meu diário </b>
+            </button>
+            <button
+              class="btn_menu"
+              onclick="window.location='ed_emocional.html'"
+            >
+              <b> Educação Emocional </b>
+            </button>
+            <button
+              class="btn_menu"
+              onclick="window.location='indicacoes.html'"
+            >
+              <b> Indicações </b>
+            </button>
+            <button class="btn_menu" onclick="window.location='popup.html'">
+              <b> Sentimento do dia </b>
+            </button>
+            <button class="btn_menu" onclick="window.location='pontos.html'">
+              <b> Meus pontos </b>
+            </button>
+            <button class="btn_menu" onclick="window.location='index.html'">
+              <b>Sair</b>
+            </button>
+          </div>
+        </nav>
 
-<div class="infos">
-	<h1 class="welcome">Bem Vindo!</h1>
-	<div class="home1_box" >
-		<div class="text_home1_box">
-		<h2 class="h2baixo">Estamos muito felizes por você estar aqui!</h2>
-		<p>Bem-vindo ao seu refúgio virtual, um espaço onde você é convidado a desabafar,
-		refletir e encontrar apoio em sua jornada emocional. Em um mundo em constante movimento, 
-		onde as pressões diárias podem parecer avassaladoras, é essencial reservar um momento para cuidar da nossa saúde mental. </p>
-		<p> Aqui, oferecemos a você a oportunidade de compartilhar seus pensamentos mais íntimos, expressar suas preocupações e celebrar suas pequenas vitórias. </p>
-		<p>Lembre-se, não importa quais sejam suas lutas, você não está sozinho.
-		Este é um lugar onde a empatia floresce e a compaixão é nossa maior aliada.
-		Junte-se a nós enquanto embarcamos nesta jornada de autoconhecimento, cura e crescimento pessoal.</p>
-		</div>
-		<img class="img1" src="CSS/imagens/saude_mental.png" alt="Saúde Mental">
-	</div>
+        <div class="infos">
+          <h1 class="welcome">Bem Vindo!</h1>
+          <div class="home1_box">
+            <div class="text_home1_box">
+              <h2 class="h2baixo">
+                Estamos muito felizes por você estar aqui!
+              </h2>
+              <p>
+                Bem-vindo ao seu refúgio virtual, um espaço onde você é
+                convidado a desabafar, refletir e encontrar apoio em sua jornada
+                emocional. Em um mundo em constante movimento, onde as pressões
+                diárias podem parecer avassaladoras, é essencial reservar um
+                momento para cuidar da nossa saúde mental.
+              </p>
+              <p>
+                Aqui, oferecemos a você a oportunidade de compartilhar seus
+                pensamentos mais íntimos, expressar suas preocupações e celebrar
+                suas pequenas vitórias.
+              </p>
+              <p>
+                Lembre-se, não importa quais sejam suas lutas, você não está
+                sozinho. Este é um lugar onde a empatia floresce e a compaixão é
+                nossa maior aliada. Junte-se a nós enquanto embarcamos nesta
+                jornada de autoconhecimento, cura e crescimento pessoal.
+              </p>
+            </div>
+            <img
+              class="img1"
+              src="CSS/imagens/saude_mental.png"
+              alt="Saúde Mental"
+            />
+          </div>
 
-	<div class="home2_box" >
-		<img class="img2" src="CSS/imagens/leventar.png" alt="Levantamento de Peso">
-		<div class="text_home2_box">
-		<h2 class="h2baixo">Bem-estar mental = Bem-estar Físico</h2>
-		<p>Além de oferecer apoio emocional, nosso site também se preocupa com o seu bem-estar físico,
-		reconhecendo a profunda conexão entre a saúde do corpo e da mente. Um recurso valioso que oferecemos é a orientação sobre o cuidado físico e sua influência na saúde mental.
-		Entendemos que uma dieta equilibrada, exercícios regulares e boas práticas de sono desempenham um papel crucial na manutenção do equilíbrio emocional.</p>
-		<p> Exploramos como a atividade física pode reduzir o estresse, a ansiedade e a depressão, além de promover uma sensação geral de bem-estar.</p>
-		<p>Ao reconhecer e nutrir a conexão entre o corpo e a mente,
-		 nosso objetivo é capacitá-lo a adotar um estilo de vida holístico que promova não apenas a saúde física,
-		 mas também o equilíbrio emocional e o bem-estar geral.</p>
-		<button class="btn" onclick="window.location.href='indicacoes.html'"> Me Explore </button>
-		</div>
-	</div>
+          <div class="home2_box">
+            <img
+              class="img2"
+              src="CSS/imagens/leventar.png"
+              alt="Levantamento de Peso"
+            />
+            <div class="text_home2_box">
+              <h2 class="h2baixo">Bem-estar mental = Bem-estar Físico</h2>
+              <p>
+                Além de oferecer apoio emocional, nosso site também se preocupa
+                com o seu bem-estar físico, reconhecendo a profunda conexão
+                entre a saúde do corpo e da mente. Um recurso valioso que
+                oferecemos é a orientação sobre o cuidado físico e sua
+                influência na saúde mental. Entendemos que uma dieta
+                equilibrada, exercícios regulares e boas práticas de sono
+                desempenham um papel crucial na manutenção do equilíbrio
+                emocional.
+              </p>
+              <p>
+                Exploramos como a atividade física pode reduzir o estresse, a
+                ansiedade e a depressão, além de promover uma sensação geral de
+                bem-estar.
+              </p>
+              <p>
+                Ao reconhecer e nutrir a conexão entre o corpo e a mente, nosso
+                objetivo é capacitá-lo a adotar um estilo de vida holístico que
+                promova não apenas a saúde física, mas também o equilíbrio
+                emocional e o bem-estar geral.
+              </p>
+              <button
+                class="btn"
+                onclick="window.location.href='indicacoes.html'"
+              >
+                Me Explore
+              </button>
+            </div>
+          </div>
 
+          <div class="home1_box">
+            <div class="text_home1_box">
+              <h2 class="h2baixo">Conhecimento faz bem</h2>
+              <p>
+                Reconhecemos a importância da informação acessível e inspiradora
+                na jornada para o bem-estar emocional. Nossa biblioteca de
+                recursos abrange uma variedade de tópicos, desde estratégias de
+                enfrentamento para lidar com o estresse até discussões sobre
+                questões específicas como ansiedade, depressão, transtorno
+                bipolar e muito mais.
+              </p>
+              <p>
+                Os vídeos fornecem uma plataforma visualmente envolvente para
+                explorar temas de saúde mental, apresentando histórias
+                inspiradoras, conselhos práticos e insights de especialistas.
+                Nossos podcasts oferecem uma experiência auditiva única,
+                permitindo que você mergulhe em conversas íntimas e informativas
+                com profissionais de saúde mental, sobreviventes e defensores do
+                bem-estar emocional.
+              </p>
+              <p>
+                Ao fornecer acesso a uma variedade de recursos multimídia, nosso
+                site visa inspirar, educar e capacitar indivíduos em sua jornada
+                de autocuidado e bem-estar emocional.
+              </p>
+              <button
+                class="btn"
+                onclick="window.location.href='ed_emocional.html'"
+              >
+                Me Explore
+              </button>
+            </div>
+            <img class="img1" src="CSS/imagens/ler_home.png" alt="Leitura" />
+          </div>
+        </div>
+      </section>
+    </main>
 
-	<div class="home1_box" >
-		<div class="text_home1_box">
-		<h2 class="h2baixo">Conhecimento faz bem</h2>
-		<p>Reconhecemos a importância da informação acessível e inspiradora na jornada para o bem-estar emocional.
-		 Nossa biblioteca de recursos abrange uma variedade de tópicos, desde estratégias de enfrentamento para 
-		 lidar com o estresse até discussões sobre questões específicas como ansiedade, depressão, transtorno bipolar e muito mais.</p>
-		<p>Os vídeos fornecem uma plataforma visualmente envolvente para explorar temas de saúde mental, apresentando histórias inspiradoras, conselhos práticos e insights de especialistas.
-		Nossos podcasts oferecem uma experiência auditiva única, permitindo que você mergulhe em conversas íntimas e informativas com profissionais de saúde mental, sobreviventes e defensores do bem-estar emocional.</p>
-		<p>Ao fornecer acesso a uma variedade de recursos multimídia, nosso site visa inspirar, educar e capacitar indivíduos em sua jornada de autocuidado e bem-estar emocional.</p>
-		<button class="btn" onclick="window.location.href='ed_emocional.html'"> Me Explore </button>
-		</div>
-		<img class="img1" src="CSS/imagens/ler_home.png" alt="Leitura">
-	</div>
-</div>
-	</section>
-</main>
-
-</body>
+    <script>
+      function toggleMenu() {
+        const menu = document.getElementById("menuItems");
+        menu.classList.toggle("expanded");
+      }
+    </script>
+  </body>
 </html>
