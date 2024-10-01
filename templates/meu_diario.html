@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diário</title>
+  <link rel="stylesheet" type="text/css" href="static/CSS/meu_diario.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Fascinate+Inline&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"> 
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="header-logo">
+        <img src="static/CSS/imagens/logo.png" alt="Site Logo">
+      </div>
+      <h1 class="header-title exo-title">SoulSpeak</h1>
+      <nav class="exo menu">
+        <button class="btn_menu" onclick="window.location='home'">Home</button>
+        <button class="btn_menu" onclick="window.location='ed_emocional'">Educação Emocional</button>
+        <button class="btn_menu" onclick="window.location='indicacoes'">Indicações</button>
+        <button class="btn_menu" onclick="window.location='popup'">Sentimento do Dia</button>
+        <button class="btn_menu" onclick="window.location='meu_diario'">Meu Diário</button>
+        <button class="btn_menu" onclick="window.location='pontos'">Meus Pontos</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section-text">
+      <h3>Momento Desabafo</h3>
+    </section>
+
+    <div class="popup-box">
+      <div class="popup">
+        <div class="content">
+          <header class="header_popup">
+            <p></p>
+            <i class="uil uil-times"></i>
+          </header>
+          <form action="#">
+            <div class="row title">
+              <label>Título</label>
+              <input type="text" spellcheck="false">
+            </div>
+            <div class="row description">
+              <label>Descrição</label>
+              <textarea spellcheck="false"></textarea>
+            </div>
+            <button>Salvar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrapper">
+      <img src="static/CSS/imagens/diario.png" alt="diário" class="diario">
+      <li class="add-box">
+        <div class="icon"><i class="uil uil-plus"></i></div>
+        <p>Escreva Aqui</p>
+      </li>
+    </div>
+
+    <div class="chatbot-section">
+      <h2>Desabafe com o Assistente Virtual</h2>
+      <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <div class="input-container">
+          <input type="text" id="user-input" placeholder="Digite sua mensagem..." />
+          <button onclick="sendMessage()">Enviar</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="static/JavaScript/meu_diario.js"></script>
+  </main>
+
+</body>
+</html>

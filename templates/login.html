@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="CSS/login.css">
+    <link rel="stylesheet" href="static/CSS/login.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Fascinate+Inline&display=swap" rel="stylesheet">
@@ -13,11 +13,11 @@
     <header>
 		<div class="header-content">
 			<div class="header-logo">
-				<img src="CSS/imagens/logo.png" alt="Site Logo">
+				<img src="static/CSS/imagens/logo.png" alt="Site Logo">
 	        </div>
 			<h1 class="header-title exo-title">SoulSpeak</h1>
 			<nav class="exo menu">
-                <button class="btn_menu" onclick="window.location='index.html'">Voltar</button>
+                <button class="btn_menu" onclick="window.location='index'">Voltar</button>
 			</nav>
 		</div>
 	</header>
@@ -32,16 +32,16 @@
                 <br><br>
                 <button type="submit" class="btn1">ENTRAR</button>
             </form>
-            <p class="p_cad"> Não possui uma conta? <a href="cadastro.html">Cadastrar</a></p>
+            <p class="p_cad"> Não possui uma conta? <a href="cadastro">Cadastrar</a></p>
     </div>
 
     <script>
         document.getElementById("cadastro").addEventListener("click", function () {
-            window.location = "cadastro.html";
+            window.location = "cadastro";
         });
     </script>
 
-    <script src="JavaScript/login.js"></script>
+    <script src="static/JavaScript/login.js"></script>
 
 </body>
 </html>
