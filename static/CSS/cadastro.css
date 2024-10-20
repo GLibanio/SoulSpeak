@@ -1,124 +1,257 @@
-*{
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
-    height: auto;
-    width: auto;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 body {
-    /* background-image: linear-gradient(to bottom, #57BBBF 40%, white); */
-    background-image: url(imagens/planodefundo.png);
-    background-attachment: fixed;
-    font-family: "Exo", sans-serif;
+  background-image: url(imagens/planodefundo.png);
+  background-attachment: fixed;
+  font-family: "Exo", sans-serif;
 }
 
 header {
-    height: 70px;
-    width: 100%;
-    background-color: white;
-    
+  height: 70px;
+  width: 100%;
+  background-color: white;
 }
 
 .header-content {
-    display: flex;
-    justify-content:left;
-    align-items: center;
-    min-width: 100%;
-  }
-  
-  .header-title {
-    font-family: "Exo", system-ui;
-    color: black;
-    font-size: 36px;
-  }
-  
-  .header-logo {
-    height: 60px;
-    width: 60px;
-    align-self: center;
-    margin-left: 10px;
-    margin-right: 20px;
-  }
-  
-  .header-logo img {
-    height: 100%;
-    width: 100%;
-  }
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 0 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  .menu{
-      display: inline-flex;
-      margin-left: auto;     
-  }
+.header-title {
+  font-family: "Exo", sans-serif;
+  color: black;
+  font-size: 36px;
+}
 
+.header-logo {
+  height: 60px;
+  width: 60px;
+  margin-left: 10px;
+  margin-right: 20px;
+}
 
-  .btn_menu{
-    cursor: pointer;
-    color: black;
-      font-size: 18px;
-      margin-right: 40px;
-      background-color: white;
-      border: 1px solid black;
-      border-radius: 25px;
-  }
+.header-logo img {
+  height: 100%;
+  width: 100%;
+}
 
+.menu {
+  display: inline-flex;
+  margin-left: auto;
+}
 
-  .exo-title{
-      font-family: "Exo", system-ui;
-      font-weight: 400;
-      font-style: normal;
-  }
+.btn_menu {
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 40px;
+  background-color: white;
+  border: 3px black;
+  border-radius: 25px;
+}
 
-  .exo {
-      font-family: "Exo", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 100;
-      font-style: normal;
-  }
-
+/* Estilos da Caixa de Cadastro */
 .container_cadastro {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 35.56px;
-    justify-content: center;
-    align-items: center;
-    height: 400px;
-    width: 400px;
-    margin: 10% 10% 10% 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 70px); /* Altura da tela menos o header */
+  padding: 20px;
 }
 
-.cadtxt{
-    margin: 6% 0% 5% 0%;
+.cadastro_box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px; /* Limite de largura */
+  overflow-y: auto; /* Para rolagem caso necessário */
+  max-height: 80vh; /* Limite de altura para caber na tela */
 }
 
-input{
-    width: 300px;
-    height: 40px;
-    top: 406.22px;
-    border-radius: 8.89px; 
-    border: 1px solid black;
-    margin: 4% 0% 1.5% 0%;
-    
+.h2_cad {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
-button {
-    font-family: "Exo", system-ui;
-    font-size: 15.5px;
-    font-weight: 110;
-    color: white;
-    background-color: black;
-    border: 3px white;
-    width: 153.78px;
-    height: 40px;
-    border-radius: 8.89px;
-    margin: 2% 0% 0% 23%;
+ input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 20px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
-.h2_cad{
-    margin: 3% 0% 1.5% 0%;
+input[type="submit"] {
+  background-color: #57bbbf;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
 }
 
+input[type="submit"]:hover {
+  background-color: #3a9ea1;
+}
 
-.p_cad{
-    margin: 3% 0% 1.5% 0%;
+.p_cad {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.p_cad a {
+  color: #57bbbf;
+  text-decoration: none;
+}
+
+.p_cad a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo do link de termos */
+.link_termos {
+  color: #57bbbf;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.link_termos:hover {
+  color: #3a9ea1;
+}
+
+/* Estilos do Popup de Termos */
+.modal {
+  display: none; /* Oculta o modal por padrão */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Fundo escurecido */
+}
+
+.modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.modal h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.modal p {
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.close {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  color: #aaa;
+}
+
+.close:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.btn_termos {
+  background-color: #57bbbf;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.btn_termos:hover {
+  background-color: #3a9ea1;
+}
+
+input[type="checkbox"] {
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#terms{
+  width: auto;
+  height: auto;
+  margin: 10px 0 20px 0;
+}
+
+.checkbox_label {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+#accept_terms {
+  background-color: #57bbbf;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#accept_terms:hover {
+  background-color: #3a9ea1;
+}
+
+.terms-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaçamento entre o botão e a checkbox */
+}
+
+.label_termos {
+  display: block;
+  margin-bottom: 10px; /* Separando o texto de introdução dos botões */
+}
+
+/* Media Queries para dispositivos menores */
+@media (max-width: 768px) {
+  .cadastro_box {
+    width: 90%; /* Diminui a caixa em dispositivos menores */
+    padding: 15px; /* Ajuste do espaçamento interno */
+  }
+
+  input,
+  select {
+    padding: 8px; /* Diminui o tamanho dos inputs */
+  }
+
+  input[type="submit"] {
+    padding: 8px; /* Ajusta o botão também */
+  }
+
+  .modal-content {
+    width: 90%; /* Reduz o tamanho do modal em telas menores */
+  }
 }

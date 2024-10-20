@@ -1,44 +1,86 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <link rel="stylesheet" href="static/CSS/cadastro.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Fascinate+Inline&display=swap" rel="stylesheet">
-    <script type="module" src="static/JavaScript/cadastro.js"></script>
-    <title>Cadastro</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/CSS/cadastro.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Fascinate+Inline&display=swap"
+      rel="stylesheet"
+    />
+    <title>Cadastro - SoulSpeak</title>
+  </head>
+  <body>
     <header>
-		<div class="header-content">
-			<div class="header-logo">
-				<img src="static/CSS/imagens/logo.png" alt="Site Logo">
-	        </div>
-			<h1 class="header-title exo-title">SoulSpeak</h1>
-			<nav class="exo menu">
-                <button class="btn_menu" onclick="window.location='index'">Voltar</button>
-			</nav>
-		</div>
-	</header>
-    
+      <div class="header-content">
+        <div class="header-logo">
+          <img src="static/CSS/imagens/logo.png" alt="Site Logo" />
+        </div>
+        <h1 class="header-title exo-title">SoulSpeak</h1>
+        <nav class="exo menu">
+          <button class="btn_menu" onclick="window.location='index'">
+            Voltar
+          </button>
+        </nav>
+      </div>
+    </header>
+
     <div class="container_cadastro">
+      <div class="cadastro_box">
         <h2 class="h2_cad">Cadastrar</h2>
+        <form id="form_cadastro">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required /><br />
 
-        <form id="Pessoa-form">
-            <input class="cadastroNome" type="text" id="nome" name="nome" required placeholder=" Nome"><br><br>
+          <label for="cpf">CPF:</label>
+          <input type="text" id="cpf" name="cpf" required /><br />
 
-            <input class="cadastroEmail" type="email" id="email" name="email" required placeholder=" Email"><br><br>
+          <label for="data_nasc">Data de Nascimento:</label>
+          <input type="date" id="data_nasc" name="data_nasc" required /><br />
 
-            <input class="cadastroSenha" type="password" id="senha" name="senha" required placeholder=" Senha"><br><br>
+          <label for="nickname">Nickname:</label>
+          <input type="text" id="nickname" name="nickname" required /><br />
 
-            <button class="button" type="submit">CADASTRAR</button>
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required /><br />
 
+          <label for="senha">Senha:</label>
+          <input type="password" id="senha" name="senha" required /><br />
+
+          <label for="tipo_usuario">Tipo de Cadastro:</label>
+          <select id="tipo_usuario" name="tipo_usuario">
+            <option value="usuario">Usuário</option>
+            <option value="psicologo">Psicólogo</option></select
+          ><br />
+
+          <div class="termos">
+            <label for="terms">Leia e aceite os termos:</label>
+            <button type="button" class="btn_termos" onclick="openTerms()">Ler Termos</button><br>
+            <label for="terms">Aceito os termos</label>
+            <input type="checkbox" id="terms" name="terms" disabled />
+          </div>
+
+          <input type="submit" value="Cadastrar" id="submit_button" disabled/>
         </form>
-        <p class="p_cad"> Já possui cadastro? <a href="login">Entre</a></p>
+
+        <p class="p_cad">Já possui cadastro? <a href="login">Entre</a></p>
+      </div>
     </div>
 
-    
-</body>
+    <div id="popup" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p id="popup_message">
+                1º Os dados estão seguros e jamais serão passados (conforme a lei de segurança dos psicólogos).<br>
+                2º Tudo falado com o chatbot dura um prazo de 24 horas, após isso, todo o dado é apagado.<br>
+                3º Outras leis e éticas dos psicólogos.<br>
+            </p>
+            <button id="accept_terms" onclick="acceptTerms()">Aceitar</button>
+        </div>
+    </div>
+
+    <script src="static/JavaScript/cadastro.js"></script>
+  </body>
 </html>

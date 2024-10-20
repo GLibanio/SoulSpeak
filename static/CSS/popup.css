@@ -1,132 +1,158 @@
-*{
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
+* {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
 }
+
 body {
-    /*background-image: linear-gradient(to bottom, #57BBBF 40%, white);*/
-    background-image: url(imagens/planodefundo.png);
-    background-attachment: fixed;
-    font-family: "Exo", sans-serif;
-  }
-  
-  header {
-      height: 70px;
-      width: 100%;
-      background-color: white;
-      
-  }
-  
-  .header-content {
-      display: flex;
-      justify-content:left;
-      align-items: center;
-      min-width: 100%;
-    }
-    
-    .header-title {
-      font-family: "Exo", system-ui;
-      color: black;
-      font-size: 36px;
-    }
-    
-    .header-logo {
-      height: 60px;
-      width: 60px;
-      align-self: center;
-      margin-left: 10px;
-      margin-right: 20px;
-    }
-    
-    .header-logo img {
-      height: 100%;
-      width: 100%;
-    }
+  background-image: url(imagens/planodefundo.png);
+  background-attachment: fixed;
+  font-family: "Exo", sans-serif;
+}
 
-    .menu{
-        display: inline-flex;
-        margin-left: auto;     
-    }
+header {
+  height: 70px;
+  width: 100%;
+  background-color: white;
+}
 
-    .btn_menu{
-        cursor: pointer;
-        font-size: 18px;
-        margin-right: 40px;
-        background-color: white;
-        border: 3px black;
-        border-radius: 25px;
-    }
+.header-content {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 0 20px;
+  max-width: 1200px;
 
-    .exo-title{
-        font-family: "Exo", system-ui;
-        font-weight: 400;
-        font-style: normal;
-    }
+  margin: 0 auto;
+}
 
-  h2{
-      font-size: 18px;
-      margin-right: 10px;
-  }
+.header-title {
+  font-family: "Exo", system-ui;
+  color: black;
+  font-size: 36px;
+}
+
+.header-logo {
+  height: 60px;
+  width: 60px;
+  align-self: center;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.header-logo img {
+  height: 100%;
+  width: 100%;
+}
+
+.menu {
+  display: inline-flex;
+  margin-left: auto;
+}
+
+.btn_menu {
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 40px;
+  background-color: white;
+  border: 3px black;
+  border-radius: 25px;
+}
+
+.exo-title {
+  font-family: "Exo", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
 
 .popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
 .close {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 .popup-title {
-    margin-top: 0;
+  margin-top: 0;
+  font-size: 20px;
 }
 
 .emojis {
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between; /* Distribui uniformemente os emojis */
+  align-items: center; /* Centraliza verticalmente */
+  margin-bottom: 20px;
 }
 
 .emojis .emoji {
-    display: inline-block;
-    margin: 0 10px;
+  display: flex;
+  flex-direction: column; /* Emojis e texto abaixo */
+  align-items: center; /* Centralizar os itens no div */
+  margin: 0 10px;
+}
+
+.emojis .emoji img {
+  width: 50px; /* Defina o tamanho conforme necessário */
+  height: 50px; /* Tamanho das imagens */
+  display: block; /* Para centralizar o emoji dentro do div */
+  margin: 0 auto; /* Centralizar na horizontal */
 }
 
 .emojis .emoji span {
-    display: block;
-    font-size: 12px;
+  display: block;
+  font-size: 12px;
+  margin-top: 5px;
 }
 
 .question {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
 }
 
 .buttons {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.buttons .button-yes,
+.buttons .button-no {
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  font-size: 14px;
+  border-radius: 5px;
 }
 
 .buttons .button-yes {
-    color: white;
-    background-color: green;
-    border: none;
-    padding: 10px 20px;
-    margin-right: 10px;
+  background-color: #4caf50; /* Verde */
 }
 
 .buttons .button-no {
-    color: white;
-    background-color: red;
-    border: none;
-    padding: 10px 20px;
+  background-color: #f44336; /* Vermelho */
+}
+
+#button-enviar {
+  background-color: #4caf50; /* Cor do botão enviar */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
 }

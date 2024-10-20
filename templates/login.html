@@ -7,41 +7,45 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Fascinate+Inline&display=swap" rel="stylesheet">
-    <title>Login</title>
+    <title>Login - SoulSpeak</title>
 </head>
 <body>
     <header>
-		<div class="header-content">
-			<div class="header-logo">
-				<img src="static/CSS/imagens/logo.png" alt="Site Logo">
-	        </div>
-			<h1 class="header-title exo-title">SoulSpeak</h1>
-			<nav class="exo menu">
+        <div class="header-content">
+            <div class="header-logo">
+                <img src="static/CSS/imagens/logo.png" alt="Site Logo">
+            </div>
+            <h1 class="header-title exo-title">SoulSpeak</h1>
+            <nav class="exo menu">
                 <button class="btn_menu" onclick="window.location='index'">Voltar</button>
-			</nav>
-		</div>
-	</header>
-    
-    <div class="caixa">
-        <div class="login">
-            <h1 class="logtxt">Login</h1>
-            <form id="loginForm">
-                <input type="email" id="email" name="email" required placeholder=" Email">
-                <br><br>
-                <input type="password" id="senha" name="senha" required placeholder=" Senha">
-                <br><br>
-                <button type="submit" class="btn1">ENTRAR</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container_login">
+        <div class="login_box">
+            <h2 class="h2_login">Entrar</h2>
+            <form id="form_login">
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" required placeholder="Email"><br>
+
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" required placeholder="Senha"><br>
+
+                <button type="submit">Login</button>
             </form>
-            <p class="p_cad"> Não possui uma conta? <a href="cadastro">Cadastrar</a></p>
+
+            <p class="p_login">Não possui cadastro? <a href="cadastro">Cadastre-se</a></p>
+        </div>
     </div>
 
-    <script>
-        document.getElementById("cadastro").addEventListener("click", function () {
-            window.location = "cadastro";
-        });
-    </script>
+    <div id="popup" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closePopup">&times;</span>
+            <p id="popup_message"></p>
+        </div>
+    </div>
 
     <script src="static/JavaScript/login.js"></script>
-
 </body>
 </html>

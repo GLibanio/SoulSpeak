@@ -1,87 +1,89 @@
-*{
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
+* {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
 }
 body {
-    /*background-image: linear-gradient(to bottom, #57BBBF 40%, white);*/
-    background-image: url(imagens/planodefundo.png);
-    background-attachment: fixed;
-    font-family: "Exo", sans-serif;
-  }
-  
-  header {
-      height: 70px;
-      width: 100%;
-      background-color: white;
-      
-  }
-  
-  .header-content {
-      display: flex;
-      justify-content:left;
-      align-items: center;
-      min-width: 100%;
-    }
-    
-    .header-title {
-      font-family: "Exo", system-ui;
-      color: black;
-      font-size: 36px;
-    }
-    
-    .header-logo {
-      height: 60px;
-      width: 60px;
-      align-self: center;
-      margin-left: 10px;
-      margin-right: 20px;
-    }
-    
-    .header-logo img {
-      height: 100%;
-      width: 100%;
-    }
+  /*background-image: linear-gradient(to bottom, #57BBBF 40%, white);*/
+  background-image: url(imagens/planodefundo.png);
+  background-attachment: fixed;
+  font-family: "Exo", sans-serif;
+}
 
-    .menu{
-        display: inline-flex;
-        margin-left: auto;     
-    }
+header {
+  height: 70px;
+  width: 100%;
+  background-color: white;
+}
 
-    .btn_menu{
-      cursor: pointer;
-        font-size: 18px;
-        margin-right: 40px;
-        background-color: white;
-        border: 3px black;
-        border-radius: 25px;
-    }
+.header-content {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 0 20px;
+  max-width: 1200px;
 
-    .exo-title{
-        font-family: "Exo", system-ui;
-        font-weight: 400;
-        font-style: normal;
-    }
+  margin: 0 auto;
+}
 
-    .h1_main {
-      margin: 0% 0% 2% 5%;
-      font-size: 40px;
-    }
+.header-title {
+  font-family: "Exo", system-ui;
+  color: black;
+  font-size: 36px;
+}
 
-    p {
-      margin: 0% 5% 0% 5%;
-    }
+.header-logo {
+  height: 60px;
+  width: 60px;
+  align-self: center;
+  margin-left: 10px;
+  margin-right: 20px;
+}
 
-    .livros{
-      display: flex;
-      flex-direction: row;
-    }
+.header-logo img {
+  height: 100%;
+  width: 100%;
+}
 
-    .liv_txt{
-      margin: 5% 0% 0% 0%;
-      flex-direction: column;
-    }
+.menu {
+  display: inline-flex;
+  margin-left: auto;
+}
 
-    iframe {
-      margin: 3% 5% 2% 10%;
-    }
+.btn_menu {
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 40px;
+  background-color: white;
+  border: 3px black;
+  border-radius: 25px;
+}
+
+.exo-title {
+  font-family: "Exo", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.h1_main {
+  margin: 0% 0% 2% 5%;
+  font-size: 40px;
+}
+
+p {
+  margin: 0% 5% 0% 5%;
+}
+
+.livros {
+  display: flex;
+  flex-direction: row;
+}
+
+.liv_txt {
+  margin: 5% 0% 0% 0%;
+  flex-direction: column;
+}
+
+iframe {
+  margin: 3% 5% 2% 10%;
+}

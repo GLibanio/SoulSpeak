@@ -19,7 +19,10 @@ header {
   display: flex;
   justify-content: left;
   align-items: center;
-  min-width: 100%;
+  padding: 0 20px;
+  max-width: 1200px;
+
+  margin: 0 auto;
 }
 
 .header-title {
@@ -53,7 +56,6 @@ header {
   background-color: white;
   border: 3px black;
   border-radius: 25px;
-  color: black;
 }
 
 .exo-title {
@@ -147,41 +149,6 @@ a {
 .sec_diario {
   display: flex;
   flex-direction: column;
-}
-
-.button {
-  width: 153.78px;
-  height: 40px;
-  margin: 47% 15% 2% 46%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  color: #7e97b8;
-  background-color: #e0e8ef;
-  border-style: solid;
-  border-width: 2px 2px 2px 2px;
-  border-color: rgba(255, 255, 255, 0.333);
-  border-radius: 40px 40px 40px 40px;
-  padding: 16px 24px 16px 28px;
-  transform: translate(0px, 0px) rotate(0deg);
-  transition: 0.2s;
-  box-shadow: -4px -2px 16px 0px #ffffff, 4px 2px 16px 0px rgb(95 157 231 / 48%);
-}
-
-.button:hover {
-  color: #516d91;
-  background-color: #e5edf5;
-  box-shadow: -2px -1px 8px 0px #ffffff, 2px 1px 8px 0px rgb(95 157 231 / 48%);
-}
-
-.button:active {
-  box-shadow: none;
 }
 
 ::selection {
@@ -436,20 +403,20 @@ form button {
   max-width: 400px;
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
 
 .chat-box {
   padding: 20px;
-  height: 300px; 
+  height: 300px;
   overflow-y: auto;
   background-color: #f9f9f9;
   border-bottom: 1px solid #ddd;
-  border-radius: 10px 10px 0 0; 
+  border-radius: 10px 10px 0 0;
 }
 
 .input-container {
@@ -468,17 +435,17 @@ input[type="text"] {
   font-size: 16px;
 }
 
-button {
+.input-container button {
   background-color: #007bff;
   color: white;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 5px;
-  margin-left: 10px; 
+  margin-left: 10px;
 }
 
-button:hover {
+.input-container button:hover {
   background-color: #0056b3;
   color: white;
 }
@@ -488,7 +455,7 @@ button:hover {
   font-weight: bold;
   color: #333;
   margin-bottom: 20px;
-  text-align: center; 
+  text-align: center;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -507,4 +474,3 @@ button:hover {
     font-size: 17px;
   }
 }
-

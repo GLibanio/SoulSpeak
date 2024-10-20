@@ -1,187 +1,173 @@
-
-*{
-    margin: 0px;
-    padding: 0px;
-    border: 0px;
-    height: auto;
-    width: auto;
+* {
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  height: auto;
+  width: auto;
 }
 body {
-    /*background-image: linear-gradient(to bottom, #57BBBF 40%, white);*/
-    background-image: url(imagens/planodefundo.png);
-    background-attachment: fixed;
-    font-family: "Exo", sans-serif;
-  }
-  
-  header {
-      height: 70px;
-      width: 100%;
-      background-color: white;
-      
-  }
-  
-  .header-content {
-      display: flex;
-      justify-content:left;
-      align-items: center;
-      min-width: 100%;
-    }
-    
-    .header-title {
-      font-family: "Exo", system-ui;
-      color: black;
-      font-size: 36px;
-    }
-    
-    .header-logo {
-      height: 60px;
-      width: 60px;
-      align-self: center;
-      margin-left: 10px;
-      margin-right: 20px;
-    }
-    
-    .header-logo img {
-      height: 100%;
-      width: 100%;
-    }
+  /*background-image: linear-gradient(to bottom, #57BBBF 40%, white);*/
+  background-image: url(imagens/planodefundo.png);
+  background-attachment: fixed;
+  font-family: "Exo", sans-serif;
+}
 
-    .menu{
-        display: inline-flex;
-        margin-left: auto;     
-    }
+header {
+  height: 70px;
+  width: 100%;
+  background-color: white;
+}
 
+.header-content {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 0 20px;
+  max-width: 1200px;
 
-    .btn_menu{
-        cursor: pointer;
-        font-size: 18px;
-        margin-right: 40px;
-        background-color: white;
-        border: 3px black;
-        border-radius: 25px;
-    }
+  margin: 0 auto;
+}
 
-    
-    .section-text{
-        font-size: 30px;
-        line-height: 1.5;
-        margin-top: 20px;
-        margin-bottom: 10px;
-        text-align: center;
-        color: teal;
-    }
-  
-    .exo-title{
-        font-family: "Exo", system-ui;
-        font-weight: 400;
-        font-style: normal;
-    }
-  
-    .exo {
-        font-family: "Exo", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: 100;
-        font-style: normal;
-    }
+.header-title {
+  font-family: "Exo", system-ui;
+  color: black;
+  font-size: 36px;
+}
 
-    .center_content{
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        margin: 20% 0% 20% 0%;
-    }
+.header-logo {
+  height: 60px;
+  width: 60px;
+  align-self: center;
+  margin-left: 10px;
+  margin-right: 20px;
+}
 
-    .center_title {
-        font-family: "Exo", system-ui;
-        font-size: 110px;
-        font-weight: 110;
-        
-    }
+.header-logo img {
+  height: 100%;
+  width: 100%;
+}
 
-    .btn{
-        font-family: "Exo", system-ui;
-        width: 153.78px;
-        height: 40px;
-        margin: 1.5% 0% 0% 0%;
-        font-size: 18px;
-        border: none;
-        outline: none;
-        background-color: #151515;
-        color: #eee;
-        border-radius: 7px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.25s ease-out;
-      }
+.menu {
+  display: inline-flex;
+  margin-left: auto;
+}
 
-      .btn:hover {
-        transform: translateY(-3px);
-      }
-      
-          
+.btn_menu {
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 40px;
+  background-color: white;
+  border: 3px black;
+  border-radius: 25px;
+}
 
+.section-text {
+  font-size: 30px;
+  line-height: 1.5;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: teal;
+}
 
+.exo-title {
+  font-family: "Exo", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
 
-    .inform_box {
-        background-color: white;
-        display: flex;
-        justify-content: space-around;
+.exo {
+  font-family: "Exo", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
 
-    }
+.center_content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 20% 0% 20% 0%;
+}
 
-    .text_inform_box{
-        flex-direction: column;
-        margin: 5% 20% 0% 20%;
-    }
+.center_title {
+  font-family: "Exo", system-ui;
+  font-size: 110px;
+  font-weight: 110;
+}
 
-    p {
-        font-size: 15px;
-        line-height: 1.5;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-  
+.btn {
+  font-family: "Exo", system-ui;
+  width: 153.78px;
+  margin: 1.5% 0% 0% 0%;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: #151515;
+  color: #eee;
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+}
 
+.btn:hover {
+  transform: translateY(-3px);
+}
 
-    .img1{
-        width: 500px;
-        height: auto;
-        margin-right: 5%;
-    }
+.inform_box {
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+}
 
-    .cont_box {
-        background-color: #8FC9C7; 
-        display: flex;
-        height: 450px;
+.text_inform_box {
+  flex-direction: column;
+  margin: 5% 20% 0% 20%;
+}
 
+p {
+  font-size: 15px;
+  line-height: 1.5;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
-    }
+.img1 {
+  width: 500px;
+  height: auto;
+  margin-right: 5%;
+}
 
-    .h2cont{
-        margin: 5% 10% 0% 27%;
-    }
+.cont_box {
+  background-color: #8fc9c7;
+  display: flex;
+  height: 450px;
+}
 
-    .input{
-        flex-direction: column;
-        margin: 5% 27% 0% 0%;
-        
-    }
+.h2cont {
+  margin: 5% 10% 0% 27%;
+}
 
-    input{
-        width: 500px;
-        height: 40px;
-        top: 406.22px;
-        border-radius: 8.89px; 
-        border: 0;
-        margin-bottom: 1.5%;
-        
-    }
+.input {
+  flex-direction: column;
+  margin: 5% 27% 0% 0%;
+}
 
-    .inputmax {
-        width: 500px;
-        height: 80px;
-        top: 406.22px;
-        border-radius: 8.89px; 
-        border: 0;
-        margin-bottom: 1.5%;
-    }
+input {
+  width: 500px;
+  height: 40px;
+  top: 406.22px;
+  border-radius: 8.89px;
+  border: 0;
+  margin-bottom: 1.5%;
+}
+
+.inputmax {
+  width: 500px;
+  height: 80px;
+  top: 406.22px;
+  border-radius: 8.89px;
+  border: 0;
+  margin-bottom: 1.5%;
+}

@@ -74,6 +74,50 @@
       </div>
     </div>
 
+    <script>
+      function typeWriter(text, elementId, speed = 50) {
+          let i = 0;
+          let element = document.getElementById(elementId);
+          element.innerHTML = ''; 
+
+          function typing() {
+              if (i < text.length) {
+                  element.innerHTML += text.charAt(i);
+                  i++;
+                  setTimeout(typing, speed);
+              }
+          }
+          typing();
+      }
+
+      function displayResponse(response) {
+          typeWriter(response, 'chat-box');
+      }
+
+      function sendMessage() {
+          let userMessage = document.getElementById("user-input").value;
+
+          if (userMessage.trim() === '') return; 
+
+          let chatBox = document.getElementById("chat-box");
+          chatBox.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
+
+          document.getElementById("user-input").value = '';
+
+          fetch('/get_response', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ message: userMessage }),
+          })
+          .then(response => response.json())
+          .then(data => {
+              displayResponse(data.response);
+          });
+      }
+    </script>
+
     <script src="static/JavaScript/meu_diario.js"></script>
   </main>
 

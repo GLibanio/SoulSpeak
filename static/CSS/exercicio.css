@@ -1,5 +1,4 @@
-
-*{
+* {
   margin: 0px;
   padding: 0px;
   border: 0px;
@@ -12,111 +11,113 @@ body {
 }
 
 header {
-    height: 70px;
-    width: 100%;
-    background-color: white;
-    
+  height: 70px;
+  width: 100%;
+  background-color: white;
 }
 
 .header-content {
-    display: flex;
-    justify-content:left;
-    align-items: center;
-    min-width: 100%;
-  }
-  
-  .header-title {
-    font-family: "Exo", system-ui;
-    color: black;
-    font-size: 36px;
-  }
-  
-  .header-logo {
-    height: 60px;
-    width: 60px;
-    align-self: center;
-    margin-left: 10px;
-    margin-right: 20px;
-  }
-  
-  .header-logo img {
-    height: 100%;
-    width: 100%;
-  }
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 0 20px;
+  max-width: 1200px;
 
-  .menu{
-      display: inline-flex;
-      margin-left: auto;     
-  }
+  margin: 0 auto;
+}
 
-  .btn_menu{
-    cursor: pointer;
-      font-size: 18px;
-      margin-right: 40px;
-      background-color: white;
-      border: 3px black;
-      border-radius: 25px;
-  }
+.header-title {
+  font-family: "Exo", system-ui;
+  color: black;
+  font-size: 36px;
+}
 
-  h2{
-      font-size: 18px;
-      margin-right: 10px;
-  }
+.header-logo {
+  height: 60px;
+  width: 60px;
+  align-self: center;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.header-logo img {
+  height: 100%;
+  width: 100%;
+}
+
+.menu {
+  display: inline-flex;
+  margin-left: auto;
+}
+
+.btn_menu {
+  cursor: pointer;
+  font-size: 18px;
+  margin-right: 40px;
+  background-color: white;
+  border: 3px black;
+  border-radius: 25px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-right: 10px;
+}
 
 .section-text {
-	padding: 30px;
-	text-align: center;
+  padding: 30px;
+  text-align: center;
   z-index: 2;
 }
 
 .section-text h3 {
-	font-size: 36px;
-	font-weight: bold;
-	margin-bottom: 20px;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
   color: black;
   z-index: 2;
 }
 
 .section-text p {
-	font-size: 18px;
-	line-height: 1.5;
-	margin-bottom: 0 px;
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 0 px;
   text-align: left;
   color: black;
   z-index: 2;
 }
 
 .section-text h4 {
-	font-size: 22px;
-	line-height: 1.5;
-	margin-bottom: 10px;
+  font-size: 22px;
+  line-height: 1.5;
+  margin-bottom: 10px;
   text-align: left;
   color: black;
   z-index: 2;
 }
 
 .section-video {
-	display: flex;
-	flex-wrap: wrap;
-	margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px auto;
   margin-left: 20px;
-	text-align: center;
+  text-align: center;
   z-index: 2;
 }
 
 .section-video iframe {
-	border: none;
-	width: calc(50% - 15px);
-	margin: 0 7.5px 15px 7.5px;
-	display: inline-block;
-	vertical-align: top;
+  border: none;
+  width: calc(50% - 15px);
+  margin: 0 7.5px 15px 7.5px;
+  display: inline-block;
+  vertical-align: top;
   z-index: 2;
 }
 
 @media (max-width: 600px) {
-	.section-video iframe {
-		width: 90%;
-	}
+  .section-video iframe {
+    width: 90%;
+  }
 }
 
 .exo {
@@ -126,42 +127,42 @@ header {
   font-style: normal;
 }
 
-.exo-title{
+.exo-title {
   font-family: "Exo", system-ui;
   font-weight: 400;
   font-style: normal;
 }
 
 .app-icon-container {
-    position: static;
-    bottom: -30px;
-    left: 25%;
-    transform: translateX(-50%);
-    z-index: 2;
-  }
-  
-.app-icon {
-    width: 50px;
-    height: 50px;
-    z-index: 2;
+  position: static;
+  bottom: -30px;
+  left: 25%;
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
-.section-links{
+.app-icon {
+  width: 50px;
+  height: 50px;
+  z-index: 2;
+}
+
+.section-links {
   text-align: left;
   margin-left: 20px;
   z-index: 2;
 }
 
-.texto-apps{
+.texto-apps {
   font-size: 18px;
-	line-height: 1.5;
+  line-height: 1.5;
   margin: 2% 0% 5% 2%;
   text-align: left;
   color: black;
   z-index: 2;
 }
 
-.box_1{
+.box_1 {
   width: 450px;
   display: inline-block;
   vertical-align: top;
@@ -169,7 +170,7 @@ header {
   z-index: 2;
 }
 
-.box_2{
+.box_2 {
   width: 450px;
   display: inline-block;
   vertical-align: top;
@@ -177,7 +178,7 @@ header {
   z-index: 2;
 }
 
-.box_3{
+.box_3 {
   width: 450px;
   display: inline-block;
   vertical-align: top;
@@ -185,7 +186,7 @@ header {
   z-index: 2;
 }
 
-h5{
+h5 {
   font-size: 16px;
   margin-bottom: 0px;
   margin-left: 20px;
@@ -193,13 +194,13 @@ h5{
   z-index: 2;
 }
 
-a{
+a {
   margin-right: 10px;
   margin-left: 20px;
   z-index: 2;
 }
 
-.exercicio-fundo{
+.exercicio-fundo {
   position: absolute;
   width: 10px;
   top: 0px;
@@ -211,13 +212,6 @@ a{
   margin: 0% 0% 2% 2%;
 }
 
-.pod_saude{
+.pod_saude {
   margin: 0% 0% 2% 2%;
 }
-
-
-
-
-
-
-  
