@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversa com Psicólogo - SoulSpeak</title>
+    <link rel="stylesheet" href="static/CSS/conversa_psicologo.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="chat-container">
+        <div class="chat-header">
+          <h2>SoulSpeak - Atendimento Psicológico</h2>
+        </div>
+        <div class="chat-content" id="chat-content">
+          <p class="waiting-message" id="waiting-message">
+            Você será atendido por um de nossos psicólogos em breve. Aguarde enquanto preparamos o atendimento.
+          </p>
+        </div>
+        <div class="chat-input" id="chat-input">
+          <input type="text" id="user-message" placeholder="Aguarde para iniciar a conversa..." disabled />
+          <button class="send-btn" onclick="sendMessage()" disabled>Enviar</button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="contact-info">
+          <p>Entre em contato: <a href="mailto:soulspeakfacens@gmail.com">soulspeakfacens@gmail.com</a></p>
+        </div>
+        <div class="partners">
+          <p>Parceiros:</p>
+          <a href="https://enlace.facens.br" target="_blank">
+            <img src="static/CSS/imagens/enlace.png" alt="Parceiro ENLACE" class="partner-logo" />
+          </a>
+          <a href="https://cvv.org.br" target="_blank">
+            <img src="static/CSS/imagens/cvv.png" alt="Parceiro CVV" class="partner-logo" />
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const usuario = "Paciente 1";
+      
+      fetch('/entrar_espera', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ usuario })
+      });
+
+      // Verifica o status a cada 5 segundos
+      setInterval(() => {
+        fetch('/verificar_status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ usuario })
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.status === 'em atendimento') {
+            iniciarChat();
+          }
+        });
+      }, 5000);
+
+      function iniciarChat() {
+        document.getElementById('waiting-message').style.display = 'none';
+        document.getElementById('user-message').disabled = false;
+        document.getElementById('user-message').placeholder = "Digite sua mensagem...";
+        document.querySelector('.send-btn').disabled = false;
+      }
+
+      function sendMessage() {
+        const messageInput = document.getElementById('user-message');
+        const message = messageInput.value;
+
+        if (message.trim() === '') return;
+
+        document.getElementById('chat-content').innerHTML += `<div class="user-message"><strong>Você:</strong> ${message}</div>`;
+        messageInput.value = '';
+
+        fetch('/enviar_mensagem', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ usuario, message })
+        }).then(response => response.json())
+          .then(data => {
+            document.getElementById('chat-content').innerHTML += `<div class="psicologo-message"><strong>Psicólogo:</strong> ${data.resposta}</div>`;
+          });
+      }
+    </script>
+  </body>
+</html>

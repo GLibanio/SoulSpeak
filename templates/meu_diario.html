@@ -1,63 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diário</title>
-  <link rel="stylesheet" type="text/css" href="static/CSS/meu_diario.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Fascinate+Inline&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diário - SoulSpeak</title>
+  <link rel="stylesheet" href="static/CSS/meu_diario.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&family=Fascinate+Inline&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
 </head>
 <body>
   <header>
     <div class="header-content">
       <div class="header-logo">
-        <img src="static/CSS/imagens/logo.png" alt="Site Logo">
+        <img src="static/CSS/imagens/logo.png" alt="Site Logo" />
       </div>
-      <h1 class="header-title exo-title">SoulSpeak</h1>
-      <nav class="exo menu">
-        <button class="btn_menu" onclick="window.location='home'">Home</button>
-        <button class="btn_menu" onclick="window.location='ed_emocional'">Educação Emocional</button>
-        <button class="btn_menu" onclick="window.location='indicacoes'">Indicações</button>
-        <button class="btn_menu" onclick="window.location='popup'">Sentimento do Dia</button>
-        <button class="btn_menu" onclick="window.location='meu_diario'">Meu Diário</button>
-        <button class="btn_menu" onclick="window.location='pontos'">Meus Pontos</button>
+      <h1 class="header-title">SoulSpeak</h1>
+      <nav class="menu">
+        <button class="btn_menu" onclick="window.location.href='home'">Home</button>
+        <button class="btn_menu" onclick="window.location.href='ed_emocional'">Educação Emocional</button>
+        <button class="btn_menu" onclick="window.location.href='indicacoes'">Indicações</button>
+        <button class="btn_menu" onclick="window.location.href='popup'">Sentimento do Dia</button>
+        <button class="btn_menu" onclick="window.location.href='meu_diario'">Meu Diário</button>
+        <button class="btn_menu" onclick="window.location.href='pontos'">Meus Pontos</button>
       </nav>
     </div>
   </header>
 
   <main>
     <section class="section-text">
-      <h3>Momento Desabafo</h3>
+      <h3>Momento desabafo</h3>
     </section>
-
     <div class="popup-box">
       <div class="popup">
         <div class="content">
           <header class="header_popup">
             <p></p>
-            <i class="uil uil-times"></i>
+            <i class="uil uil-times" onclick="closePopup()"></i>
           </header>
-          <form action="#">
+          <form id="note-form">
             <div class="row title">
-              <label>Título</label>
-              <input type="text" spellcheck="false">
+              <label for="title">Título</label>
+              <input type="text" id="title" spellcheck="false">
             </div>
             <div class="row description">
-              <label>Descrição</label>
-              <textarea spellcheck="false"></textarea>
+              <label for="description">Descrição</label>
+              <textarea id="description" spellcheck="false"></textarea>
             </div>
-            <button>Salvar</button>
+            <button type="button" onclick="saveNote()">Salvar</button>
           </form>
         </div>
       </div>
     </div>
 
     <div class="wrapper">
-      <img src="static/CSS/imagens/diario.png" alt="diário" class="diario">
-      <li class="add-box">
+      <img src="static/CSS/imagens/diario.png" alt="diario" class="diario">
+      <li class="add-box" onclick="openPopup()">
         <div class="icon"><i class="uil uil-plus"></i></div>
         <p>Escreva Aqui</p>
       </li>
@@ -68,58 +67,35 @@
       <div class="chat-container">
         <div class="chat-box" id="chat-box"></div>
         <div class="input-container">
-          <input type="text" id="user-input" placeholder="Digite sua mensagem..." />
+          <input type="text" id="user-input" placeholder="Digite sua mensagem" />
           <button onclick="sendMessage()">Enviar</button>
         </div>
       </div>
     </div>
 
-    <script>
-      function typeWriter(text, elementId, speed = 50) {
-          let i = 0;
-          let element = document.getElementById(elementId);
-          element.innerHTML = ''; 
-
-          function typing() {
-              if (i < text.length) {
-                  element.innerHTML += text.charAt(i);
-                  i++;
-                  setTimeout(typing, speed);
-              }
-          }
-          typing();
-      }
-
-      function displayResponse(response) {
-          typeWriter(response, 'chat-box');
-      }
-
-      function sendMessage() {
-          let userMessage = document.getElementById("user-input").value;
-
-          if (userMessage.trim() === '') return; 
-
-          let chatBox = document.getElementById("chat-box");
-          chatBox.innerHTML += `<p><strong>Você:</strong> ${userMessage}</p>`;
-
-          document.getElementById("user-input").value = '';
-
-          fetch('/get_response', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({ message: userMessage }),
-          })
-          .then(response => response.json())
-          .then(data => {
-              displayResponse(data.response);
-          });
-      }
-    </script>
-
-    <script src="static/JavaScript/meu_diario.js"></script>
+    <div class="button-container">
+      <button onclick="window.location.href='conversa_psicologo'" class="btn_menu psicologo-btn">Conversar com Psicólogo</button>
+    </div>
   </main>
 
+  <footer>
+    <div class="footer-content">
+      <div class="contact-info">
+        <p>Entre em contato: <a href="mailto:soulspeakfacens@gmail.com">soulspeakfacens@gmail.com</a></p>
+      </div>
+      <div class="partners">
+        <p>Parceiros:</p>
+        <a href="https://enlace.facens.br" target="_blank">
+          <img src="static/CSS/imagens/enlace.png" alt="Parceiro ENLACE" class="partner-logo" />
+        </a>
+        <a href="https://cvv.org.br" target="_blank">
+          <img src="static/CSS/imagens/cvv.png" alt="Parceiro CVV" class="partner-logo" />
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="static/JavaScript/meu_diario.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 </body>
 </html>

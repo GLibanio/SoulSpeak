@@ -1,0 +1,172 @@
+ /* Estilização geral */
+ body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #4a4a4a;
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+/* Estilização da tabela */
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4a90e2;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+td {
+    color: #555;
+}
+
+/* Links de ação */
+a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #4a90e2;
+    color: #fff;
+}
+
+/* Estilos para o rodapé */
+footer {
+    margin-top: 30px;
+    font-size: 0.8em;
+    color: #888;
+}
+
+/* Estilo do botão de Logout */
+.logout-btn {
+    background-color: #ff4d4d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.logout-btn:hover {
+    background-color: #ff1a1a;
+}
+
+/* Estilo dos botões de Aprovar e Reprovar */
+.approve-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px;
+}
+
+.approve-btn:hover {
+    background-color: #45a049;
+}
+
+.reject-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.reject-btn:hover {
+    background-color: #d32f2f;
+}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Exo', sans-serif;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .partners p {
+    margin: 0;
+    color: #333;
+  }
+  
+  .partner-logo {
+    width: 100px;
+    margin: 10px;
+  }
+  
+  .partner-logo:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .contact-info {
+    background-color: #ffffff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .contact-info p {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .contact-info a {
+    color: #0066cc;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .contact-info a:hover {
+    color: #004999;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  
+  .contact-info::before {
+    content: "📧"; /* Ícone de e-mail */
+    font-size: 1.3em;
+    margin-right: 8px;
+  }
+  

@@ -1,93 +1,34 @@
 from datetime import datetime, timedelta
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
+from werkzeug.security import generate_password_hash
+from itsdangerous import URLSafeTimedSerializer
 from difflib import get_close_matches
+import difflib
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash  # Import para hash de senha
 import re  # Para validar email e CPF
 from flask_bcrypt import Bcrypt
 import os
+import json
+import unidecode
+from textblob import TextBlob
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 bcrypt = Bcrypt(app)
 
+usuarios_espera = []
+usuarios_atendimento = {}
+mensagens_chat = {}
+
+s = URLSafeTimedSerializer(app.secret_key)
+
 # Base de conhecimento em português
-knowledge_base = {
-    "questions": [
-        {"question": "Ola", 
-         "answer": "Olá! Como posso te ajudar?"},
-        {"question": "Como posso lidar com a incerteza sobre meu futuro?", 
-         "answer": "Lidar com a incerteza pode ser difícil, mas focar no presente e em ações que você pode controlar é um bom começo."},
-        {"question": "E se eu nunca encontrar uma carreira que me faça feliz?", 
-         "answer": "É normal ter essas preocupações. Experimente explorar diferentes áreas e interesses para descobrir o que realmente te faz feliz."},
-        {"question": "Como posso parar de me comparar com outras pessoas da minha idade?", 
-         "answer": "Lembre-se de que cada pessoa tem seu próprio ritmo. Foque em seu crescimento pessoal e nas suas conquistas."},
-        {"question": "O que eu faço quando sinto que estou ficando para trás na vida?", 
-         "answer": "É importante lembrar que o sucesso não é uma corrida. Defina seus próprios objetivos e siga no seu ritmo."},
-        {"question": "Como posso lidar com a pressão da minha família sobre meu futuro?", 
-         "answer": "Converse abertamente com sua família sobre seus sentimentos e tente encontrar um meio-termo entre suas expectativas e as deles."},
-        {"question": "Como faço para aceitar que não tenho tudo planejado ainda?", 
-         "answer": "Aceitar a incerteza faz parte do crescimento. Concentre-se em dar pequenos passos em direção aos seus objetivos."},
-        {"question": "Será que minhas decisões erradas agora vão arruinar meu futuro?", 
-         "answer": "Erros fazem parte do aprendizado. Use-os como oportunidades para crescer e evoluir."},
-        {"question": "É normal sentir que tudo é muito incerto e fora de controle?", 
-         "answer": "Sim, é completamente normal. Foque nas áreas da sua vida onde você pode fazer mudanças e evoluir."},
-        {"question": "Como posso lidar com a ansiedade de não saber se vou conseguir um emprego depois de me formar?", 
-         "answer": "Tente planejar pequenas etapas, como estágios ou desenvolvimento de habilidades, para aumentar suas chances de sucesso."},
-        {"question": "Existe alguma técnica rápida para reduzir minha ansiedade quando penso no futuro?", 
-         "answer": "Tente técnicas de respiração profunda, meditação ou dar uma caminhada para reduzir a ansiedade."},
-        {"question": "Como posso encontrar algo que me motive, mesmo quando estou desanimado?", 
-         "answer": "Procure atividades que você goste ou que te desafiem. Conectar-se com outras pessoas também pode ajudar."},
-        {"question": "E se eu nunca atingir os objetivos que eu esperava para minha vida?", 
-         "answer": "Objetivos podem mudar ao longo do tempo. Reavalie o que é importante para você e ajuste suas expectativas de acordo."},
-        {"question": "Como posso ter esperança em um mundo tão incerto?", 
-         "answer": "Encontre pequenas razões para ser grato e focar no que você pode controlar. Isso ajuda a construir esperança aos poucos."},
-        {"question": "O que posso fazer para me sentir mais no controle do meu futuro?", 
-         "answer": "Defina metas alcançáveis e estabeleça um plano de ação para cada uma. Pequenas vitórias aumentam a sensação de controle."},
-        {"question": "Como eu posso saber se estou no caminho certo?", 
-         "answer": "Avalie regularmente seus objetivos e veja se estão alinhados com seus valores e sonhos. Ajustes são normais no percurso."},
-        {"question": "Estou muito estressado.",
-         "answer": "Entendo. O estresse pode ser desgastante. O que tem te deixado mais sobrecarregado ultimamente?"},
-        {"question": "Sinto que estou sempre triste.",
-         "answer": "Sinto muito por você estar passando por isso. Você gostaria de compartilhar mais sobre o que tem causado essa tristeza?"},
-        {"question": "Não estou conseguindo dormir bem.",
-         "answer": "Dormir mal pode afetar muito nosso bem-estar. Tem algo específico que está te impedindo de descansar?"},
-        {"question": "Estou tendo problemas com meus amigos.",
-         "answer": "É normal enfrentar desafios em relacionamentos. O que exatamente está acontecendo?"},
-        {"question": "Não me sinto bem comigo mesmo.",
-         "answer": "Muitos passam por isso em algum momento. O que te faz sentir assim?"},
-        {"question": "Estou sem motivação para fazer as coisas.",
-         "answer": "É difícil quando a motivação some. Tem algo que costumava te animar que você poderia tentar novamente?"},
-        {"question": "Me sinto muito sozinho.",
-         "answer": "Sentir solidão pode ser doloroso. Você gostaria de falar sobre isso ou talvez buscar formas de se conectar com os outros?"},
-        {"question": "Estou me sentindo ansioso.",
-         "answer": "A ansiedade pode ser difícil de lidar. O que você acha que está causando essa ansiedade?"},
-        {"question": "Não consigo me concentrar.",
-         "answer": "A falta de concentração pode ser frustrante. Tem algo específico que está te distraindo?"},
-        {"question": "Sinto que não tenho apoio.",
-         "answer": "É importante se sentir apoiado. Você gostaria de explorar maneiras de encontrar suporte?"},
-        {"question": "Estou me sentindo sobrecarregado.",
-         "answer": "Entendo, isso pode ser muito difícil. Quais são as principais coisas que estão te sobrecarregando agora?"},
-        {"question": "Sinto raiva frequentemente.",
-         "answer": "A raiva é uma emoção normal, mas pode ser intensa. O que costuma te deixar assim?"},
-        {"question": "Não sei como lidar com meus sentimentos.",
-         "answer": "É normal se sentir perdido às vezes. Que tipo de sentimentos você está enfrentando?"},
-        {"question": "Estou preocupado com o futuro.",
-         "answer": "Preocupações sobre o futuro podem ser angustiante. O que especificamente te preocupa?"},
-        {"question": "Sinto que ninguém me entende.",
-         "answer": "Isso pode ser muito solitário. Você gostaria de compartilhar mais sobre como se sente?"},
-        {"question": "Estou tendo dificuldades no trabalho.",
-         "answer": "Isso pode ser desafiador. O que está acontecendo no trabalho que tem te preocupado?"},
-        {"question": "Estou lidando com uma perda.",
-         "answer": "Sinto muito pela sua perda. Você gostaria de falar sobre isso ou sobre como se sente?"},
-        {"question": "Sinto que estou estagnado.",
-         "answer": "É comum sentir-se assim às vezes. O que você gostaria de mudar em sua vida?"},
-        {"question": "Me sinto culpado por tudo.",
-         "answer": "Sentir culpa pode ser pesado. O que está te fazendo sentir assim?"},
-        {"question": "Estou tendo dificuldades para lidar com mudanças.",
-         "answer": "Mudanças podem ser desafiadoras e assustadoras. O que especificamente está te incomodando nessas mudanças?"}
-    ]
-}
+with open('knowledge_base.json', 'r', encoding='utf-8') as file:
+    knowledge_base = json.load(file)
+
+# Agora você pode acessar as perguntas e respostas
+questions = knowledge_base["questions"]
 
 def validar_email(email):
     return re.match(r"[^@]+@[^@]+\.[^@]+", email)
@@ -100,48 +41,6 @@ def connect_db():
     conectar = sqlite3.connect('user.db')
     return conectar
 
-def criar_tabela_login():
-    conectar = connect_db()
-    cursor = conectar.cursor()
-
-    # Excluindo a tabela existente e recriando com os novos campos
-    cursor.execute('DROP TABLE IF EXISTS usuarios')
-
-    # Criando a tabela unificada para usuários e psicólogos
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS usuarios (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            nome TEXT NOT NULL,
-            cpf TEXT NOT NULL UNIQUE,
-            data_nasc DATE NOT NULL,
-            nickname TEXT NOT NULL UNIQUE,
-            email TEXT NOT NULL UNIQUE,
-            senha TEXT NOT NULL,
-            tipo_usuario TEXT NOT NULL -- Novo campo para distinguir entre "usuario" e "psicologo"
-        );
-    ''')
-    
-    conectar.commit()
-    conectar.close()
-
-def criar_tabela_pontos():
-    conectar = connect_db()
-    cursor = conectar.cursor()
-
-    # Criando a tabela de pontos associada ao usuário
-    cursor.execute(''' 
-        CREATE TABLE IF NOT EXISTS pontos_usuario (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            user_id INTEGER NOT NULL,
-            saldo_pontos INTEGER DEFAULT 0,  -- Saldo de pontos do usuário
-            ultimo_ganho TIMESTAMP,           -- Campo para armazenar a última vez que ganhou pontos
-            data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES usuarios(id) -- Chave estrangeira para usuários
-        );
-    ''')
-
-    conectar.commit()
-    conectar.close()
     
 def adicionar_pontos_se_necessario(user_id):
     conectar = connect_db()
@@ -163,8 +62,51 @@ def adicionar_pontos_se_necessario(user_id):
         print("Usuário não encontrado.")  # Para depuração
 
     conectar.close()
+    
+#TABELAS
+
+def criar_tabela_login():
+    conectar = connect_db()
+    cursor = conectar.cursor()
+
+    # Cria a nova tabela com os campos adicionais
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS usuarios (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            cpf TEXT NOT NULL UNIQUE,
+            data_nasc DATE NOT NULL,
+            nickname TEXT NOT NULL UNIQUE,
+            email TEXT NOT NULL UNIQUE,
+            senha TEXT NOT NULL,
+            tipo_usuario TEXT NOT NULL,  -- Distinção entre "usuario" e "psicologo"
+            pergunta_seguranca TEXT,     -- Pergunta de segurança
+            resposta_seguranca TEXT      -- Resposta de segurança
+        );
+    ''')
+
+    conectar.commit()
+    conectar.close()
 
 
+def criar_tabela_pontos():
+    conectar = connect_db()
+    cursor = conectar.cursor()
+
+    # Criando a tabela de pontos associada ao usuário
+    cursor.execute(''' 
+        CREATE TABLE IF NOT EXISTS pontos_usuario (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            saldo_pontos INTEGER DEFAULT 0,  -- Saldo de pontos do usuário
+            ultimo_ganho TIMESTAMP,           -- Campo para armazenar a última vez que ganhou pontos
+            data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES usuarios(id) -- Chave estrangeira para usuários
+        );
+    ''')
+
+    conectar.commit()
+    conectar.close()
 
 def criar_tabela_chat():
     conectar = connect_db()
@@ -179,6 +121,104 @@ def criar_tabela_chat():
         );
     ''')
     
+    conectar.commit()
+    conectar.close()
+    
+def criar_tabela_admin():
+    conectar = connect_db()
+    cursor = conectar.cursor()
+    
+    # Cria a tabela de administrador, se ainda não existir
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS admin (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            email TEXT NOT NULL UNIQUE,
+            senha TEXT NOT NULL,
+            data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+    ''')
+    
+    # Verifica se já existe um admin com o email especificado
+    cursor.execute("SELECT * FROM admin WHERE email = ?", ('admin@admin.com',))
+    admin_existente = cursor.fetchone()
+    
+    # Insere o admin padrão se ele não existir
+    if not admin_existente:
+        nome_admin = "Admin"
+        email_admin = "admin@admin.com"
+        senha_admin = "123"
+        
+        # Criptografa a senha antes de armazená-la
+        senha_hash = bcrypt.generate_password_hash(senha_admin).decode('utf-8')
+        
+        cursor.execute('''
+            INSERT INTO admin (nome, email, senha)
+            VALUES (?, ?, ?)
+        ''', (nome_admin, email_admin, senha_hash))
+    
+    conectar.commit()
+    conectar.close()
+
+def criar_tabela_diario():
+    conectar = connect_db()
+    cursor = conectar.cursor()
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS diario (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            texto_diario TEXT NOT NULL,
+            data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES usuarios(id)
+        );
+    ''')
+    
+    conectar.commit()
+    conectar.close()
+
+def criar_tabela_analise_psicologo():
+    conectar = connect_db()
+    cursor = conectar.cursor()
+    
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS analise_psicologo (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            cpf TEXT NOT NULL UNIQUE,
+            data_nasc DATE NOT NULL,
+            nickname TEXT NOT NULL UNIQUE,
+            email TEXT NOT NULL UNIQUE,
+            senha TEXT NOT NULL,
+            tipo_usuario TEXT NOT NULL,
+            pergunta_seguranca TEXT,
+            resposta_seguranca TEXT,
+            status TEXT DEFAULT 'pendente'
+        );
+    ''')
+    
+    conectar.commit()
+    conectar.close()
+    
+def criar_tabela_psicologos_aceitos():
+    conectar = connect_db()
+    cursor = conectar.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS psicologos_aceitos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            cpf TEXT NOT NULL UNIQUE,
+            data_nasc DATE NOT NULL,
+            nickname TEXT NOT NULL UNIQUE,
+            email TEXT NOT NULL UNIQUE,
+            senha TEXT NOT NULL,
+            tipo_usuario TEXT NOT NULL,     -- Coluna adicionada para tipo de usuário
+            pergunta_seguranca TEXT,        -- Pergunta de segurança
+            resposta_seguranca TEXT         -- Resposta de segurança
+        );
+    ''')
+
     conectar.commit()
     conectar.close()
 
@@ -212,10 +252,27 @@ def apagar_mensagens_anteriores():
     conectar.close()
 
 
+ #ROTAS
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 
 @app.route('/')
 def base():
     return render_template('index.html')
+
+@app.route('/admin')
+def admin_dashboard():
+    conectar = connect_db()
+    cursor = conectar.cursor()
+    # Busca psicólogos pendentes
+    cursor.execute("SELECT * FROM analise_psicologo WHERE status = 'pendente'")
+    psicologos_pendentes = cursor.fetchall()
+    conectar.close()
+    # Renderiza a página com os psicólogos pendentes
+    return render_template('admin.html', psicologos=psicologos_pendentes)
+
 
 @app.route('/ed_emocional')
 def ed_emocional():
@@ -243,7 +300,8 @@ def Hidratar():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    return render_template('home.html') 
+
 
 @app.route('/index')
 def index():
@@ -277,7 +335,7 @@ def podcasts():
 def pontos():
     if "user_id" in session:
         user_id = session['user_id']
-        adicionar_pontos_se_necessario(user_id)  # Aqui
+        adicionar_pontos_se_necessario(user_id)
 
         conectar = connect_db()
         cursor = conectar.cursor()
@@ -286,7 +344,7 @@ def pontos():
         nickname = cursor.fetchone()
 
         if nickname is None:
-            return "Usuário não encontrado", 404
+            return render_template('404.html'), 404
 
         nickname = nickname[0]
         cursor.execute('SELECT saldo_pontos FROM pontos_usuario WHERE user_id = ?', (user_id,))
@@ -297,11 +355,15 @@ def pontos():
 
         return render_template('pontos.html', nickname=nickname, saldo_pontos=saldo_pontos)
     else:
-        return jsonify({"success": False, "message": "Usuário não logado."})
+        return render_template('login_necessario.html'), 401
     
 @app.route('/popup')
 def popup():
     return render_template('popup.html')
+
+@app.route('/psicologo')
+def psico():
+    return render_template('psico_comunicacao.html')
 
 @app.route('/sono')
 def sono():
@@ -311,43 +373,102 @@ def sono():
 def videos():
     return render_template('videos.html')
 
-# Função para encontrar a melhor correspondência com base na similaridade
-def find_best_match(user_input, possible_questions):
-    # Usa a função get_close_matches do difflib para encontrar a correspondência mais próxima
-    matches = get_close_matches(user_input, possible_questions, n=1, cutoff=0.6)  # n=1 retorna a melhor correspondência
-    if matches:
-        return matches[0]
-    return None
+#Conversa
+
+@app.route('/conversa_psicologo')
+def conversa_psico():
+    return render_template('conversa_psicologo.html')
+
+@app.route('/entrar_espera', methods=['POST'])
+def entrar_espera():
+    usuario = request.json.get('usuario')
+    if usuario not in usuarios_espera:
+        usuarios_espera.append(usuario)
+    return jsonify({"message": "Usuário adicionado à espera"}), 200
+
+# Endpoint para listar os usuários em espera
+@app.route('/listar_espera')
+def listar_espera():
+    return jsonify({"usuarios": usuarios_espera})
+
+# Endpoint para puxar o usuário da lista de espera para o atendimento
+@app.route('/puxar_usuario', methods=['POST'])
+def puxar_usuario():
+    usuario = request.json.get('usuario')
+    if usuario in usuarios_espera:
+        usuarios_espera.remove(usuario)
+        usuarios_atendimento[usuario] = True
+        mensagens_chat[usuario] = []
+    return jsonify({"message": "Usuário puxado para atendimento"}), 200
+
+# Endpoint para verificar o status do usuário (espera/atendimento)
+@app.route('/verificar_status', methods=['POST'])
+def verificar_status():
+    usuario = request.json.get('usuario')
+    status = 'em atendimento' if usuarios_atendimento.get(usuario) else 'em espera'
+    return jsonify({"status": status})
+
+# Endpoint para enviar e receber mensagens no chat
+@app.route('/enviar_mensagem', methods=['POST'])
+def enviar_mensagem():
+    usuario = request.json.get('usuario')
+    message = request.json.get('message')
+    if usuario in usuarios_atendimento:
+        mensagens_chat[usuario].append({"sender": "Paciente", "message": message})
+        # Resposta simulada do psicólogo
+        resposta = f"Resposta automática do Psicólogo para: {message}"
+        mensagens_chat[usuario].append({"sender": "Psicólogo", "message": resposta})
+        return jsonify({"resposta": resposta}), 200
+    return jsonify({"error": "Usuário não está em atendimento"}), 400
+
+#CHATBOT
+
+def normalizar_texto(texto):
+    texto = texto.lower()
+    texto = unidecode.unidecode(texto)
+    return texto
+
+# Função para correção ortográfica
+def corrigir_ortografia(texto):
+    return str(TextBlob(texto).correct())
+
+def find_best_match(user_input, questions):
+    # Normaliza e corrige a entrada do usuário
+    user_input = corrigir_ortografia(normalizar_texto(user_input))
+    
+    # Normaliza as perguntas na base de conhecimento
+    normalized_questions = [normalizar_texto(q["question"]) for q in questions]
+    
+    # Encontra a pergunta mais semelhante
+    matches = difflib.get_close_matches(user_input, normalized_questions, n=1, cutoff=0.6)
+    return matches[0] if matches else None
 
 @app.route('/get_response', methods=['POST'])
 def get_response():
-    # Captura a entrada do usuário
+    # Captura e processa a entrada do usuário
     user_input = request.json['message']
+    user_input = normalizar_texto(corrigir_ortografia(user_input))
     
     # Encontre a melhor correspondência na base de perguntas
-    best_match = find_best_match(user_input.lower(), [q["question"].lower() for q in knowledge_base["questions"]])
-    
-    print(f"Entrada do usuário: {user_input}")
-    print(f"Melhor correspondência: {best_match}")
+    best_match = find_best_match(user_input, questions)
     
     if best_match:
-        # Se encontrar a correspondência, retornar a resposta correspondente
+        # Retorna a resposta correspondente
         for q in knowledge_base["questions"]:
-            if q["question"].lower() == best_match:
+            if normalizar_texto(q["question"]) == best_match:
                 response = q["answer"]
                 break
     else:
         # Resposta padrão caso não haja correspondência
         response = "Desculpe, eu não sei a resposta."
     
-    print(f"Resposta: {response}")
-
     return jsonify({"response": response})
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro_usuario():
     if request.method == 'POST':
         try:
+            # Recebendo os dados do formulário
             nome = request.form['nome']
             cpf = request.form['cpf']
             data_nasc = request.form['data_nasc']
@@ -355,51 +476,163 @@ def cadastro_usuario():
             email = request.form['email']
             senha = request.form['senha']
             tipo_usuario = request.form['tipo_usuario']
+            pergunta_seguranca = request.form['pergunta_seguranca']
+            resposta_seguranca = request.form['resposta_seguranca'].strip().lower()  # Normaliza sem hash
 
-            # Hash da senha
+            # Hash da senha para maior segurança
             hashed_senha = bcrypt.generate_password_hash(senha).decode('utf-8')
 
             conectar = connect_db()
             cursor = conectar.cursor()
-            cursor.execute('''
-                INSERT INTO usuarios (nome, cpf, data_nasc, nickname, email, senha, tipo_usuario)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-            ''', (nome, cpf, data_nasc, nickname, email, hashed_senha, tipo_usuario))
+
+            # Verificar se o e-mail já está cadastrado
+            cursor.execute("SELECT * FROM usuarios WHERE email = ?", (email,))
+            usuario_existente = cursor.fetchone()
+
+            if usuario_existente:
+                return jsonify({'error': 'Este e-mail já está cadastrado.'}), 400
+
+            # Inserir na tabela de análise se for psicólogo
+            if tipo_usuario == 'psicologo':
+                cursor.execute('''
+                    INSERT INTO analise_psicologo (nome, cpf, data_nasc, nickname, email, senha, tipo_usuario, pergunta_seguranca, resposta_seguranca, status)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'pendente')
+                ''', (nome, cpf, data_nasc, nickname, email, hashed_senha, tipo_usuario, pergunta_seguranca, resposta_seguranca))
+            else:
+                cursor.execute('''
+                    INSERT INTO usuarios (nome, cpf, data_nasc, nickname, email, senha, tipo_usuario, pergunta_seguranca, resposta_seguranca)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ''', (nome, cpf, data_nasc, nickname, email, hashed_senha, tipo_usuario, pergunta_seguranca, resposta_seguranca))
 
             conectar.commit()
             conectar.close()
-
+            
             return jsonify({'message': 'Usuário cadastrado com sucesso!'}), 201
         except Exception as e:
-            return jsonify({'error': str(e)}), 400
-
-    return render_template('cadastro.html')  # Renderiza o formulário se for um GET
-
-# Função de login com verificação segura de senha
+            return jsonify({'error': f'Erro ao cadastrar usuário: {str(e)}'}), 500
+        
+        
 @app.route('/login', methods=['POST'])
 def login_usuario():
     try:
-        email = request.form['email']
-        senha = request.form['senha']
+        email = request.form.get('email')
+        senha = request.form.get('senha')
+        
+        if not email or not senha:
+            return jsonify({'error': 'Por favor, forneça um email e senha.'}), 400
 
         conectar = connect_db()
         cursor = conectar.cursor()
 
+        # Verifica se o login é de um administrador
+        cursor.execute('SELECT * FROM admin WHERE email = ?', (email,))
+        admin = cursor.fetchone()
+
+        if admin:
+            # Se o usuário é administrador, verifica a senha
+            stored_password_hash = admin[3]  # Coluna de senha na tabela admin
+            if bcrypt.check_password_hash(stored_password_hash, senha):
+                session['user_id'] = admin[0]
+                session['tipo_usuario'] = 'admin'
+                return jsonify({'success': True, 'tipo_usuario': 'admin'}), 200
+            else:
+                return jsonify({'error': 'Usuário ou senha incorretos!'}), 401
+
+        # Verifica se o usuário está na tabela 'usuarios'
         cursor.execute('SELECT * FROM usuarios WHERE email = ?', (email,))
+        user = cursor.fetchone()
+        
+        if not user:
+            # Se o usuário não está em 'usuarios', tenta buscar em 'psicologos_aceitos'
+            cursor.execute('SELECT * FROM psicologos_aceitos WHERE email = ?', (email,))
+            user = cursor.fetchone()
+            is_psicologo = True if user else False
+        else:
+            is_psicologo = False
+
+        conectar.close()
+
+        # Verifica a senha do usuário ou psicólogo encontrado
+        if user:
+            stored_password_hash = user[6]
+            if bcrypt.check_password_hash(stored_password_hash, senha):
+                session['user_id'] = user[0]
+                session['tipo_usuario'] = 'psicologo' if is_psicologo else 'usuario'
+                return jsonify({'success': True, 'tipo_usuario': session['tipo_usuario']}), 200
+            else:
+                return jsonify({'error': 'Usuário ou senha incorretos!'}), 401
+        else:
+            return jsonify({'error': 'Usuário não encontrado!'}), 404
+
+    except Exception as e:
+        return jsonify({'error': f"Erro ao realizar login: {str(e)}"}), 400
+    
+    
+#RECUPERAR SENHA
+
+@app.route('/recuperar_senha', methods=['GET', 'POST'])
+def recuperar_senha():
+    if request.method == 'POST':
+        email = request.form.get('email').strip()
+        resposta_usuario = request.form.get('resposta_seguranca').strip().lower()
+
+        # Verificação rápida se os campos estão preenchidos
+        if not email or not resposta_usuario:
+            return 'E-mail e resposta de segurança são obrigatórios.', 400
+
+        conectar = connect_db()
+        cursor = conectar.cursor()
+
+        # Verifica a resposta de segurança no banco
+        cursor.execute('SELECT resposta_seguranca FROM usuarios WHERE email = ?', (email,))
         user = cursor.fetchone()
         conectar.close()
 
-        if user and bcrypt.check_password_hash(user[6], senha):  # Verifica a senha
-            session['user_id'] = user[0]  # Armazenando o user_id na sessão
-            tipo_usuario = user[7]
-            if tipo_usuario == 'psicologo':
-                return 'Você entrou como psicólogo!', 200
-            else:
-                return 'Você entrou como usuário!', 200
-        else:
-            return 'Usuário ou senha incorretos!', 401
-    except Exception as e:
-        return str(e), 400
+        if not user:
+            return 'E-mail não encontrado.', 400
+
+        resposta_armazenada = user[0].strip().lower()
+        print(f"Resposta armazenada: '{resposta_armazenada}', Resposta do usuário: '{resposta_usuario}'")
+        if resposta_armazenada != resposta_usuario:
+            return 'Resposta de segurança incorreta.', 400
+
+        # Redireciona para a redefinição de senha
+        return redirect(url_for('resetar_senha', email=email))
+
+    return render_template('recuperar_senha.html')
+
+# Rota para redefinir a senha
+@app.route('/resetar_senha', methods=['GET', 'POST'])
+def resetar_senha():
+    if request.method == 'POST':
+        email = request.form.get('email')  # Agora pega o e-mail do corpo da requisição
+        nova_senha = request.form['nova_senha']
+        print(f"Email recebido no POST: {email}")  # Print para depuração
+
+        if not email:
+            return 'Erro: E-mail não encontrado na requisição.', 400
+
+        senha_hash = bcrypt.generate_password_hash(nova_senha).decode('utf-8')
+        
+        conectar = connect_db()
+        cursor = conectar.cursor()
+        
+        # Atualiza a senha
+        cursor.execute('UPDATE usuarios SET senha = ? WHERE email = ?', (senha_hash, email))
+        conectar.commit()
+
+        # Verifique se alguma linha foi afetada
+        if cursor.rowcount == 0:
+            conectar.close()
+            return 'Erro: Nenhum registro foi atualizado. E-mail não encontrado.', 400
+
+        conectar.close()
+        return 'Senha redefinida com sucesso!', 200
+
+    # Caso seja um método GET, apenas retorna a página
+    email = request.args.get('email')
+    print(f"Tentando redefinir senha para o email: {email}")
+    return render_template('resetar_senha.html', email=email)
 
 
 def alterar_tabela_pontos():
@@ -431,13 +664,62 @@ def status_pontos():
     else:
         return jsonify({"success": False, "message": "Usuário não logado."}), 401
     
+    
+#Aprovar Psico
+@app.route('/admin/psicologos_pendentes')
+def admin_psicologos_pendentes():
+    conectar = connect_db()
+    cursor = conectar.cursor()
+
+    cursor.execute("SELECT * FROM analise_psicologo WHERE status = 'pendente'")
+    psicologos_pendentes = cursor.fetchall()
+    conectar.close()
+
+    return render_template('admin.html', psicologos=psicologos_pendentes)
+
+from flask import jsonify
+
+@app.route('/admin/aprovar_psicologo/<int:id>', methods=['POST'])
+def aprovar_psicologo(id):
+    conectar = connect_db()
+    cursor = conectar.cursor()
+    
+    # Move o psicólogo para a tabela 'psicologos_aceitos'
+    cursor.execute('''
+        INSERT INTO psicologos_aceitos (nome, cpf, data_nasc, nickname, email, senha, tipo_usuario, pergunta_seguranca, resposta_seguranca)
+        SELECT nome, cpf, data_nasc, nickname, email, senha, tipo_usuario, pergunta_seguranca, resposta_seguranca
+        FROM analise_psicologo WHERE id = ?
+    ''', (id,))
+    
+    # Atualiza o status para "aprovado" na tabela de análise
+    cursor.execute("UPDATE analise_psicologo SET status = 'aprovado' WHERE id = ?", (id,))
+    conectar.commit()
+    conectar.close()
+    
+    return jsonify({'success': True})
+
+@app.route('/admin/reprovar_psicologo/<int:id>', methods=['POST'])
+def reprovar_psicologo(id):
+    conectar = connect_db()
+    cursor = conectar.cursor()
+
+    # Atualiza o status para "reprovado" na tabela de análise
+    cursor.execute("UPDATE analise_psicologo SET status = 'reprovado' WHERE id = ?", (id,))
+    conectar.commit()
+    conectar.close()
+
+    return jsonify({'success': True})
+
+    
 if __name__ == '__main__':
-    # Exclua o arquivo user.db antes de executar para garantir que as tabelas sejam criadas novamente
     criar_tabela_login()
     criar_tabela_chat()
     criar_tabela_pontos()
+    criar_tabela_admin()
+    criar_tabela_diario()
+    criar_tabela_analise_psicologo()
+    criar_tabela_psicologos_aceitos()
     
-    # Chama a função para alterar a tabela de pontos
     alterar_tabela_pontos()
     
     conectar = connect_db()

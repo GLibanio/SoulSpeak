@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recuperar Senha</title>
+    <link rel="stylesheet" href="static/CSS/recuperar.css" />
+  </head>
+  <body>
+    <div class="container_recuperar">
+      <div class="recuperar_box">
+        <h2 class="h2_recuperar">Recuperar Senha</h2>
+        <form action="/recuperar_senha" method="post">
+          <label for="email">E-mail:</label>
+          <input type="text" name="email" required /><br />
+          <label for="resposta_seguranca">Resposta de Segurança:</label>
+          <input type="text" name="resposta_seguranca" required /><br />
+          <button type="submit">Verificar</button>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="contact-info">
+          <p>Entre em contato: <a href="mailto:soulspeakfacens@gmail.com">soulspeakfacens@gmail.com</a></p>
+        </div>
+        <div class="partners">
+          <p>Parceiros:</p>
+          <a href="https://enlace.facens.br" target="_blank">
+            <img src="static/CSS/imagens/enlace.png" alt="Parceiro ENLACE" class="partner-logo" />
+          </a>
+          <a href="https://cvv.org.br" target="_blank">
+            <img src="static/CSS/imagens/cvv.png" alt="Parceiro CVV" class="partner-logo" />
+          </a>
+        </div>
+      </div>
+    </footer>
+    <script src="static/JavaScript/recuperar.js"></script>
+  </body>
+</html>

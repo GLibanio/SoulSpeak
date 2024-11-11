@@ -19,26 +19,30 @@ function openTerms() {
 
 // Função para aceitar os termos e habilitar o checkbox
 function acceptTerms() {
-    document.getElementById('terms').disabled = false; // Habilita a checkbox
-    document.getElementById('popup').style.display = "none"; // Fecha o popup
+    document.getElementById('terms').disabled = false; // Habilita o checkbox
+    document.getElementById('popup').style.display = "none"; // Fecha o popup de termos
 }
 
-// Verifica se a checkbox de termos está marcada e habilita o botão de envio
+// Verifica se o checkbox de termos está marcado e habilita o botão de envio
 document.getElementById('terms').addEventListener('change', function() {
     var submitButton = document.getElementById('submit_button');
-    if (this.checked) {
-        submitButton.disabled = false; // Habilita o botão de envio
-    } else {
-        submitButton.disabled = true; // Desabilita o botão se desmarcar
-    }
+    submitButton.disabled = !this.checked; // Habilita/desabilita o botão de envio
 });
+
+// Função para mostrar popups (erro ou sucesso)
+function showPopup(message) {
+    var popup = document.getElementById('popup_message');
+    popup.textContent = message;
+    var modal = document.getElementById('popup');
+    modal.style.display = "block";
+}
 
 // Função para realizar o cadastro via AJAX
 document.getElementById('form_cadastro').onsubmit = function(event) {
     event.preventDefault();
 
     var formData = new FormData(this);
-    
+
     fetch('/cadastro', {
         method: 'POST',
         body: formData
@@ -46,11 +50,16 @@ document.getElementById('form_cadastro').onsubmit = function(event) {
     .then(response => response.json())
     .then(data => {
         if (data.message) {
-            // Cadastro bem-sucedido
-            showPopup('Cadastro realizado com sucesso! Redirecionando para login...');
-            setTimeout(function() {
-                window.location.href = '/login';
-            }, 3000);  // Redireciona após 3 segundos
+            // Verifica o tipo de usuário para definir a mensagem
+            const tipoUsuario = formData.get('tipo_usuario');
+            if (tipoUsuario === 'psicologo') {
+                showPopup('Cadastro realizado! Aguarde até que seja aprovado pelo administrador.');
+            } else {
+                showPopup('Cadastro realizado com sucesso! Redirecionando para login...');
+                setTimeout(function() {
+                    window.location.href = '/login';
+                }, 3000);  // Redireciona após 3 segundos
+            }
         } else {
             // Erro no cadastro
             showPopup('Erro: ' + data.error);

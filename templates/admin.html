@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Admin - Aprovar Psicólogos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/admin.css') }}">
+</head>
+<body>
+    <div class="admin-header">
+        <h1>Psicólogos Pendentes</h1>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>CPF</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody id="psychologists-list">
+            {% for psico in psicologos %}
+            <tr data-id="{{ psico[0] }}">
+                <td>{{ psico[1] }}</td>
+                <td>{{ psico[5] }}</td>
+                <td>{{ psico[2] }}</td>
+                <td>
+                    <button class="approve-btn" onclick="alterarStatus('{{ url_for('aprovar_psicologo', id=psico[0]) }}', this)">Aprovar</button>
+                    <button class="reject-btn" onclick="alterarStatus('{{ url_for('reprovar_psicologo', id=psico[0]) }}', this)">Reprovar</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function logout() {
+            window.location.href = "{{ url_for('login') }}";
+        }
+
+        function alterarStatus(url, button) {
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const row = button.closest('tr');
+                    row.remove();
+                } else {
+                    alert('Erro ao alterar status. Tente novamente.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao enviar a solicitação.');
+            });
+        }
+    </script>
+</body>
+</html>

@@ -12,26 +12,32 @@ document.getElementById("form_login").addEventListener("submit", function(event)
             },
             body: new URLSearchParams({ email: email, senha: senha }),
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
-            // Prepara o popup
             const popup = document.getElementById('popup');
             const popupMessage = document.getElementById('popup_message');
             const closePopup = document.getElementById('closePopup');
 
-            if (data.includes('Você entrou')) {
-                popupMessage.innerText = data;  // Mensagem de sucesso
-                popup.style.display = 'block';  // Mostra o popup
+            if (data.success) {
+                popupMessage.innerText = "Login bem-sucedido!";
+                popup.style.display = 'block';
                 setTimeout(() => {
-                    window.location.href = "home";  // Redireciona após 2 segundos
+                    // Redireciona com base no tipo de usuário
+                    if (data.tipo_usuario === 'admin') {
+                        window.location.href = "/admin";
+                    } else if (data.tipo_usuario === 'psicologo') {
+                        window.location.href = "/psicologo";
+                    } else {
+                        window.location.href = "/home";
+                    }
                 }, 2000);
             } else {
-                popupMessage.innerText = 'Erro: ' + data;  // Mensagem de erro
-                popup.style.display = 'block';  // Mostra o popup
+                popupMessage.innerText = 'Erro: ' + data.error;
+                popup.style.display = 'block';
             }
 
             closePopup.onclick = function() {
-                popup.style.display = 'none';  // Fecha o popup
+                popup.style.display = 'none';
             };
         })
         .catch((error) => {
@@ -43,7 +49,6 @@ document.getElementById("form_login").addEventListener("submit", function(event)
     }
 });
 
-// Para fechar o popup quando clicar fora dele
 window.onclick = function(event) {
     const popup = document.getElementById('popup');
     if (event.target === popup) {

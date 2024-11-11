@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Negado - Login Necessário</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/login_necessario.css') }}">
+</head>
+<body>
+    <div class="access-denied">
+        <h1>Ops! Acesso Negado</h1>
+        <p>Para acessar esta página, é necessário estar logado.</p>
+        <a href="{{ url_for('login') }}" class="btn-login">Fazer Login</a>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+          <div class="contact-info">
+            <p>Entre em contato: <a href="mailto:soulspeakfacens@gmail.com">soulspeakfacens@gmail.com</a></p>
+          </div>
+          <div class="partners">
+            <p>Parceiros:</p>
+            <a href="https://enlace.facens.br" target="_blank">
+              <img src="static/CSS/imagens/enlace.png" alt="Parceiro ENLACE" class="partner-logo" />
+            </a>
+            <a href="https://cvv.org.br" target="_blank">
+              <img src="static/CSS/imagens/cvv.png" alt="Parceiro CVV" class="partner-logo" />
+            </a>
+          </div>
+        </div>
+      </footer>
+</body>
+</html>

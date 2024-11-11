@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel do Psicólogo - SoulSpeak</title>
+    <link rel="stylesheet" href="static/CSS/psico.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <!-- Sidebar com abas e lista de espera -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h2>Psicólogo</h2>
+          <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+        <div class="tabs">
+          <button
+            id="atendendo-tab"
+            class="tab active"
+            onclick="showAtendendo()"
+          >
+            Atendendo
+          </button>
+          <button id="espera-tab" class="tab" onclick="showEspera()">
+            Espera
+          </button>
+        </div>
+
+        <div class="users-list" id="espera-list">
+          <h3>Em Espera</h3>
+          <!-- Usuários em espera serão inseridos aqui -->
+        </div>
+      </div>
+
+      <!-- Área principal de conversa -->
+      <div class="chat-container">
+        <div class="chat-header">
+          <h3>Conversa com Paciente</h3>
+        </div>
+        <div class="chat-content" id="chat-content">
+          <!-- Conteúdo do chat -->
+        </div>
+        <div class="chat-input">
+          <input type="text" placeholder="Digite uma mensagem..." />
+          <button class="send-btn">Enviar</button>
+        </div>
+      </div>
+    </div>
+    
+
+    <script>
+      function logout() {
+        window.location.href = "{{ url_for('login') }}";
+      }
+
+      function showAtendendo() {
+        document.getElementById("atendendo-tab").classList.add("active");
+        document.getElementById("espera-tab").classList.remove("active");
+        document.getElementById("espera-list").style.display = "none";
+        document.getElementById("chat-content").style.display = "block"; // Exibe a área de chat
+      }
+
+      function showEspera() {
+        document.getElementById("espera-tab").classList.add("active");
+        document.getElementById("atendendo-tab").classList.remove("active");
+        document.getElementById("espera-list").style.display = "block";
+        document.getElementById("chat-content").style.display = "none"; // Oculta a área de chat
+      }
+    </script>
+  </body>
+</html>

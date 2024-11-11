@@ -1,0 +1,130 @@
+/* Reset de margens e padding */
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+  }
+  body {
+    background-image: url("imagens/planodefundo.png");
+    background-attachment: fixed;
+    font-family: "Exo", sans-serif;
+  }
+  
+  /* Container principal */
+  .container_resetar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Caixa do formulário */
+  .resetar_box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+  }
+  
+  /* Estilo do título */
+  .h2_resetar {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Estilo dos inputs */
+  input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0 20px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  /* Estilo do botão */
+  button {
+    width: 100%;
+    padding: 12px;
+    background-color: #57bbbf;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #3a9ea1;
+  }
+  
+  footer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Exo', sans-serif;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .partners p {
+    margin: 0;
+    color: #333;
+  }
+  
+  .partner-logo {
+    width: 100px;
+    margin: 10px;
+  }
+  
+  .partner-logo:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .contact-info {
+    background-color: #ffffff;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .contact-info p {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .contact-info a {
+    color: #0066cc;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  
+  .contact-info a:hover {
+    color: #004999;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  
+  .contact-info::before {
+    content: "📧"; /* Ícone de e-mail */
+    font-size: 1.3em;
+    margin-right: 8px;
+  }
+  

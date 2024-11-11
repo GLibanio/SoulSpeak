@@ -49,6 +49,28 @@
           <label for="senha">Senha:</label>
           <input type="password" id="senha" name="senha" required /><br />
 
+          <label for="pergunta_seguranca">Pergunta de Segurança:</label>
+          <select id="pergunta_seguranca" name="pergunta_seguranca" required>
+            <option value="">Selecione uma pergunta...</option>
+            <option value="Qual é o nome do seu primeiro animal de estimação?">
+              Qual é o nome do seu primeiro animal de estimação?
+            </option>
+            <option value="Qual é o nome da cidade onde você nasceu?">
+              Qual é o nome da cidade onde você nasceu?
+            </option>
+            <option value="Qual é o nome do seu melhor amigo de infância?">
+              Qual é o nome do seu melhor amigo de infância?
+            </option>
+          ><br />
+
+          <label for="resposta_seguranca">Resposta de Segurança:</label>
+          <input
+            type="text"
+            id="resposta_seguranca"
+            name="resposta_seguranca"
+            required
+          /><br />
+
           <label for="tipo_usuario">Tipo de Cadastro:</label>
           <select id="tipo_usuario" name="tipo_usuario">
             <option value="usuario">Usuário</option>
@@ -57,12 +79,14 @@
 
           <div class="termos">
             <label for="terms">Leia e aceite os termos:</label>
-            <button type="button" class="btn_termos" onclick="openTerms()">Ler Termos</button><br>
+            <button type="button" class="btn_termos" onclick="openTerms()">
+              Ler Termos</button
+            ><br />
             <label for="terms">Aceito os termos</label>
             <input type="checkbox" id="terms" name="terms" disabled />
           </div>
 
-          <input type="submit" value="Cadastrar" id="submit_button" disabled/>
+          <input type="submit" value="Cadastrar" id="submit_button" disabled />
         </form>
 
         <p class="p_cad">Já possui cadastro? <a href="login">Entre</a></p>
@@ -70,16 +94,40 @@
     </div>
 
     <div id="popup" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p id="popup_message">
-                1º Os dados estão seguros e jamais serão passados (conforme a lei de segurança dos psicólogos).<br>
-                2º Tudo falado com o chatbot dura um prazo de 24 horas, após isso, todo o dado é apagado.<br>
-                3º Outras leis e éticas dos psicólogos.<br>
-            </p>
-            <button id="accept_terms" onclick="acceptTerms()">Aceitar</button>
-        </div>
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="popup_message">
+          1º Todos os dados e informações compartilhadas são mantidos em sigilo, de acordo com o Código de Ética Profissional do Psicólogo (Resolução CFP nº 010/2005) e a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018).<br />
+          2º As mensagens trocadas com o chatbot são temporárias e serão excluídas em até 24 horas, conforme os princípios de minimização e limitação da retenção de dados estabelecidos pela LGPD.<br />
+          3º O serviço respeita as normas éticas e deontológicas da psicologia, garantindo a segurança, privacidade e confidencialidade de todas as interações, conforme as diretrizes do Conselho Federal de Psicologia.<br />
+      </p>
+        <button id="accept_terms" onclick="acceptTerms()">Aceitar</button>
+      </div>
     </div>
+
+    <div id="success_popup" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p id="success_message">Cadastro realizado com sucesso!</p>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="contact-info">
+          <p>Entre em contato: <a href="mailto:soulspeakfacens@gmail.com">soulspeakfacens@gmail.com</a></p>
+        </div>
+        <div class="partners">
+          <p>Parceiros:</p>
+          <a href="https://enlace.facens.br" target="_blank">
+            <img src="static/CSS/imagens/enlace.png" alt="Parceiro ENLACE" class="partner-logo" />
+          </a>
+          <a href="https://cvv.org.br" target="_blank">
+            <img src="static/CSS/imagens/cvv.png" alt="Parceiro CVV" class="partner-logo" />
+          </a>
+        </div>
+      </div>
+    </footer>
 
     <script src="static/JavaScript/cadastro.js"></script>
   </body>

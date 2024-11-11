@@ -4,10 +4,10 @@
   border: 0px;
 }
 body {
-  /*background-image: linear-gradient(to bottom, #57BBBF 40%, white);*/
   background-image: url(imagens/planodefundo.png);
   background-attachment: fixed;
   font-family: "Exo", sans-serif;
+  
 }
 
 header {
@@ -22,7 +22,6 @@ header {
   align-items: center;
   padding: 0 20px;
   max-width: 1200px;
-
   margin: 0 auto;
 }
 
@@ -66,24 +65,103 @@ header {
 }
 
 .h1_main {
-  margin: 0% 0% 2% 5%;
-  font-size: 40px;
+  font-size: 32px;
+  font-weight: 600;
+  color: #333;
+  margin: 20px 5%;
 }
 
 p {
-  margin: 0% 5% 0% 5%;
+  margin: 0 5% 20px;
+  color: #555;
+  font-size: 18px;
 }
 
 .livros {
   display: flex;
   flex-direction: row;
+  padding: 20px 0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .liv_txt {
-  margin: 5% 0% 0% 0%;
-  flex-direction: column;
+  flex: 1;
+  margin: 0 20px;
 }
 
 iframe {
-  margin: 3% 5% 2% 10%;
+  margin: 20px 5%;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
+.section_livros {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+footer {
+  background-color: #f8f9fa;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Exo', sans-serif;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.partners p {
+  margin: 0;
+  color: #333;
+}
+
+.partner-logo {
+  width: 100px;
+  margin: 10px;
+}
+
+.partner-logo:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.contact-info {
+  background-color: #ffffff;
+  padding: 15px 25px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.contact-info p {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: 500;
+  color: #333;
+}
+
+.contact-info a {
+  color: #0066cc;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  color: #004999;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.contact-info::before {
+  content: "📧"; /* Ícone de e-mail */
+  font-size: 1.3em;
+  margin-right: 8px;
+}
+

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redefinir Senha</title>
+    <link rel="stylesheet" href="static/CSS/resetar.css" />
+  </head>
+  <body>
+    <div class="container_resetar">
+      <div class="resetar_box">
+        <h2 class="h2_resetar">Redefinir Senha</h2>
+        <form id="form_redefinir" method="post">
+          <label for="nova_senha">Nova Senha:</label>
+          <input
+            type="password"
+            id="nova_senha"
+            name="nova_senha"
+            required
+          /><br />
+
+          <!-- Campo oculto para o e-mail -->
+          <input type="hidden" id="email_hidden" name="email" />
+
+          <button type="submit">Redefinir Senha</button>
+        </form>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="contact-info">
+          <p>
+            Entre em contato:
+            <a href="mailto:soulspeakfacens@gmail.com"
+              >soulspeakfacens@gmail.com</a
+            >
+          </p>
+        </div>
+        <div class="partners">
+          <p>Parceiros:</p>
+          <a href="https://enlace.facens.br" target="_blank">
+            <img
+              src="static/CSS/imagens/enlace.png"
+              alt="Parceiro ENLACE"
+              class="partner-logo"
+            />
+          </a>
+          <a href="https://cvv.org.br" target="_blank">
+            <img
+              src="static/CSS/imagens/cvv.png"
+              alt="Parceiro CVV"
+              class="partner-logo"
+            />
+          </a>
+        </div>
+      </div>
+    </footer>
+    <script src="static/JavaScript/resetar.js"></script>
+  </body>
+</html>
