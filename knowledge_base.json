@@ -146,5 +146,10 @@
          "answer": "Às vezes, é difícil se abrir. Existe algo que te bloqueia?"},
         {"question": "Quando se sente inseguro(a), o que normalmente te ajuda a recuperar a confiança ou a tranquilidade?", 
          "answer": "A insegurança pode ser difícil. Tem algo que te ajuda a se sentir mais seguro?"}
-    ]
+    ],
+    "emotional_responses": {
+        "mal": "Sinto muito por você estar se sentindo assim. Quer conversar mais sobre isso?",
+        "triste": "Sinto muito por isso. Estou aqui para te ouvir.",
+        "bem": "Fico feliz em saber disso! Posso ajudar com algo mais?"
+    }
 }

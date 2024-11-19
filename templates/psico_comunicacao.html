@@ -5,51 +5,178 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Painel do Psicólogo - SoulSpeak</title>
     <link rel="stylesheet" href="static/CSS/psico.css" />
+    <style>
+      /* Estilo para o botão de finalizar atendimento */
+      .finalizar-btn {
+        background-color: #ff4d4d;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .finalizar-btn:hover {
+        background-color: #e63946;
+      }
+
+      /* Estilo para o botão de atender */
+      .atender-btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 6px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .atender-btn:hover {
+        background-color: #45a049;
+      }
+    </style>
   </head>
   <body>
     <div class="main-container">
-      <!-- Sidebar com abas e lista de espera -->
       <div class="sidebar">
         <div class="sidebar-header">
           <h2>Psicólogo</h2>
           <button class="logout-btn" onclick="logout()">Logout</button>
         </div>
         <div class="tabs">
-          <button
-            id="atendendo-tab"
-            class="tab active"
-            onclick="showAtendendo()"
-          >
-            Atendendo
-          </button>
-          <button id="espera-tab" class="tab" onclick="showEspera()">
-            Espera
-          </button>
+          <button id="atendendo-tab" class="tab active" onclick="showAtendendo()">Atendendo</button>
+          <button id="espera-tab" class="tab" onclick="showEspera()">Espera</button>
         </div>
-
-        <div class="users-list" id="espera-list">
+        <div id="atendendo-list" class="users-list" style="display: block;">
+          <h3>Atendendo</h3>
+          <ul id="lista-atendimento"></ul>
+        </div>
+        <div id="espera-list" class="users-list" style="display: none;">
           <h3>Em Espera</h3>
-          <!-- Usuários em espera serão inseridos aqui -->
+          <ul id="lista-espera"></ul>
         </div>
       </div>
 
-      <!-- Área principal de conversa -->
       <div class="chat-container">
         <div class="chat-header">
           <h3>Conversa com Paciente</h3>
+          <button class="finalizar-btn" onclick="finalizarAtendimento()">Finalizar Atendimento</button>
         </div>
-        <div class="chat-content" id="chat-content">
-          <!-- Conteúdo do chat -->
-        </div>
+        <div class="chat-content" id="chat-content"></div>
         <div class="chat-input">
-          <input type="text" placeholder="Digite uma mensagem..." />
-          <button class="send-btn">Enviar</button>
+          <input type="text" id="message-input" placeholder="Digite uma mensagem..." />
+          <button class="send-btn" onclick="enviarMensagem()">Enviar</button>
         </div>
       </div>
     </div>
-    
 
     <script>
+      let usuarioAtendimento = null;
+      let mensagensAntigas = [];
+
+      // Carrega a lista de espera
+      function carregarListaEspera() {
+        fetch("/listar_espera")
+          .then((response) => response.json())
+          .then((data) => {
+            const listaEspera = document.getElementById("lista-espera");
+            listaEspera.innerHTML = "";
+            data.usuarios.forEach((usuario) => {
+              const listItem = document.createElement("li");
+              listItem.textContent = usuario;
+
+              // Botão para iniciar o atendimento
+              const atenderBtn = document.createElement("button");
+              atenderBtn.textContent = "Atender";
+              atenderBtn.classList.add("atender-btn");
+              atenderBtn.onclick = () => puxarUsuario(usuario);
+
+              listItem.appendChild(atenderBtn);
+              listaEspera.appendChild(listItem);
+            });
+          });
+      }
+
+      // Carrega a lista de atendimentos ativos
+      function carregarListaAtendimento() {
+        fetch("/listar_atendimento")
+          .then((response) => response.json())
+          .then((data) => {
+            const listaAtendimento = document.getElementById("lista-atendimento");
+            listaAtendimento.innerHTML = "";
+            data.usuarios.forEach((usuario) => {
+              const listItem = document.createElement("li");
+              listItem.textContent = usuario;
+              listaAtendimento.appendChild(listItem);
+            });
+          });
+      }
+
+      function puxarUsuario(usuario) {
+        fetch("/puxar_usuario", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ usuario }),
+        }).then(() => {
+          usuarioAtendimento = usuario;
+          mensagensAntigas = [];
+          document.getElementById("chat-content").innerHTML = "";
+          carregarMensagens();
+          carregarListaAtendimento();
+          carregarListaEspera();
+        });
+      }
+
+      function enviarMensagem() {
+        const messageInput = document.getElementById("message-input");
+        const message = messageInput.value;
+
+        if (!message.trim() || !usuarioAtendimento) return;
+
+        fetch("/enviar_mensagem", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ usuario: usuarioAtendimento, message, sender: "Psicólogo" }),
+        }).then(() => {
+          document.getElementById("chat-content").innerHTML += `<div><strong>Psicólogo:</strong> ${message}</div>`;
+          messageInput.value = "";
+        });
+      }
+
+      function carregarMensagens() {
+        if (!usuarioAtendimento) return;
+
+        fetch(`/mensagens_chat/${usuarioAtendimento}`)
+          .then((response) => response.json())
+          .then((data) => {
+            const chatContent = document.getElementById("chat-content");
+            if (JSON.stringify(data.mensagens) !== JSON.stringify(mensagensAntigas)) {
+              chatContent.innerHTML = "";
+              data.mensagens.forEach((mensagem) => {
+                chatContent.innerHTML += `<div><strong>${mensagem.sender}:</strong> ${mensagem.message}</div>`;
+              });
+              mensagensAntigas = data.mensagens;
+            }
+          });
+      }
+
+      setInterval(carregarMensagens, 2000);
+
+      function finalizarAtendimento() {
+        if (usuarioAtendimento) {
+          fetch("/finalizar_atendimento", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ usuario: usuarioAtendimento }),
+          }).then(() => {
+            usuarioAtendimento = null;
+            document.getElementById("chat-content").innerHTML = "";
+            carregarListaAtendimento();
+            carregarListaEspera();
+          });
+        }
+      }
+
       function logout() {
         window.location.href = "{{ url_for('login') }}";
       }
@@ -58,15 +185,19 @@
         document.getElementById("atendendo-tab").classList.add("active");
         document.getElementById("espera-tab").classList.remove("active");
         document.getElementById("espera-list").style.display = "none";
-        document.getElementById("chat-content").style.display = "block"; // Exibe a área de chat
+        document.getElementById("atendendo-list").style.display = "block";
       }
 
       function showEspera() {
         document.getElementById("espera-tab").classList.add("active");
         document.getElementById("atendendo-tab").classList.remove("active");
         document.getElementById("espera-list").style.display = "block";
-        document.getElementById("chat-content").style.display = "none"; // Oculta a área de chat
+        document.getElementById("atendendo-list").style.display = "none";
+        carregarListaEspera();
       }
+
+      carregarListaAtendimento();
+      showAtendendo();
     </script>
   </body>
 </html>

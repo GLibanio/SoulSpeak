@@ -477,7 +477,9 @@ input[type="text"] {
 }
 
 .button-container {
-  text-align: center;
+  padding-bottom: 20px; /* Ajuste o valor conforme necessário */
+  display: flex;
+  justify-content: center;
   margin-top: 20px;
 }
 

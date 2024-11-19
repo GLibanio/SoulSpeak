@@ -382,16 +382,20 @@ def conversa_psico():
 @app.route('/entrar_espera', methods=['POST'])
 def entrar_espera():
     usuario = request.json.get('usuario')
-    if usuario not in usuarios_espera:
+    if usuario and usuario not in usuarios_espera:
         usuarios_espera.append(usuario)
     return jsonify({"message": "Usuário adicionado à espera"}), 200
 
-# Endpoint para listar os usuários em espera
+@app.route('/mensagens_chat/<usuario>')
+def mensagens_chat_usuario(usuario):
+    if usuario in mensagens_chat:
+        return jsonify({"mensagens": mensagens_chat[usuario]}), 200
+    return jsonify({"error": "Nenhuma mensagem encontrada para o usuário"}), 404
+
 @app.route('/listar_espera')
 def listar_espera():
     return jsonify({"usuarios": usuarios_espera})
 
-# Endpoint para puxar o usuário da lista de espera para o atendimento
 @app.route('/puxar_usuario', methods=['POST'])
 def puxar_usuario():
     usuario = request.json.get('usuario')
@@ -399,70 +403,110 @@ def puxar_usuario():
         usuarios_espera.remove(usuario)
         usuarios_atendimento[usuario] = True
         mensagens_chat[usuario] = []
-    return jsonify({"message": "Usuário puxado para atendimento"}), 200
+        return jsonify({"message": "Usuário puxado para atendimento"}), 200
+    return jsonify({"error": "Usuário não está na lista de espera"}), 404
 
-# Endpoint para verificar o status do usuário (espera/atendimento)
 @app.route('/verificar_status', methods=['POST'])
 def verificar_status():
     usuario = request.json.get('usuario')
-    status = 'em atendimento' if usuarios_atendimento.get(usuario) else 'em espera'
+    if usuario in usuarios_atendimento:
+        status = 'em atendimento'
+    elif usuario in usuarios_espera:
+        status = 'em espera'
+    else:
+        status = 'finalizado'
     return jsonify({"status": status})
 
-# Endpoint para enviar e receber mensagens no chat
 @app.route('/enviar_mensagem', methods=['POST'])
 def enviar_mensagem():
     usuario = request.json.get('usuario')
     message = request.json.get('message')
+    sender = request.json.get('sender', 'Paciente')  # Define 'Paciente' como padrão
+
     if usuario in usuarios_atendimento:
-        mensagens_chat[usuario].append({"sender": "Paciente", "message": message})
-        # Resposta simulada do psicólogo
-        resposta = f"Resposta automática do Psicólogo para: {message}"
-        mensagens_chat[usuario].append({"sender": "Psicólogo", "message": resposta})
-        return jsonify({"resposta": resposta}), 200
+        mensagens_chat[usuario].append({"sender": sender, "message": message})
+        return jsonify({"resposta": f"Mensagem enviada pelo {sender.lower()}"}), 200
     return jsonify({"error": "Usuário não está em atendimento"}), 400
+
+@app.route('/finalizar_atendimento', methods=['POST'])
+def finalizar_atendimento():
+    usuario = request.json.get('usuario')
+    if usuario in usuarios_atendimento:
+        del usuarios_atendimento[usuario]
+        return jsonify({"message": "Atendimento finalizado para o usuário"}), 200
+    return jsonify({"error": "Usuário não está em atendimento"}), 400
+
 
 #CHATBOT
 
+# Função para normalizar o texto
 def normalizar_texto(texto):
-    texto = texto.lower()
-    texto = unidecode.unidecode(texto)
-    return texto
+    return unidecode.unidecode(texto.lower())
 
-# Função para correção ortográfica
+# Função para correção ortográfica (opcional, comentar se não quiser)
 def corrigir_ortografia(texto):
-    return str(TextBlob(texto).correct())
+    try:
+        return str(TextBlob(texto).correct())
+    except Exception as e:
+        print(f"Erro na correção ortográfica: {e}")
+        return texto  # Retorna o texto original se houver erro
 
+# Função para encontrar a melhor correspondência
 def find_best_match(user_input, questions):
-    # Normaliza e corrige a entrada do usuário
-    user_input = corrigir_ortografia(normalizar_texto(user_input))
+    # Normaliza a entrada do usuário
+    normalized_user_input = normalizar_texto(user_input)
+    print(f"Entrada normalizada: {normalized_user_input}")
     
     # Normaliza as perguntas na base de conhecimento
     normalized_questions = [normalizar_texto(q["question"]) for q in questions]
+    print(f"Perguntas normalizadas: {normalized_questions}")
     
     # Encontra a pergunta mais semelhante
-    matches = difflib.get_close_matches(user_input, normalized_questions, n=1, cutoff=0.6)
+    matches = difflib.get_close_matches(normalized_user_input, normalized_questions, n=1, cutoff=0.4)
+    print(f"Melhor correspondência encontrada: {matches}")
     return matches[0] if matches else None
+
+def detect_emotional_response(user_input):
+    emotional_keywords = knowledge_base["emotional_responses"].keys()
+    for keyword in emotional_keywords:
+        if keyword in user_input:
+            return knowledge_base["emotional_responses"][keyword]
+    return None
 
 @app.route('/get_response', methods=['POST'])
 def get_response():
-    # Captura e processa a entrada do usuário
-    user_input = request.json['message']
-    user_input = normalizar_texto(corrigir_ortografia(user_input))
-    
-    # Encontre a melhor correspondência na base de perguntas
-    best_match = find_best_match(user_input, questions)
-    
-    if best_match:
-        # Retorna a resposta correspondente
-        for q in knowledge_base["questions"]:
-            if normalizar_texto(q["question"]) == best_match:
-                response = q["answer"]
-                break
-    else:
+    try:
+        # Captura e processa a entrada do usuário
+        user_input = request.json.get('message', '').strip()
+        print(f"Entrada do usuário: {user_input}")
+        
+        if not user_input:
+            return jsonify({"response": "Por favor, forneça uma mensagem válida."}), 400
+        
+        # Normaliza e verifica respostas emocionais
+        normalized_user_input = normalizar_texto(user_input)
+        emotional_response = detect_emotional_response(normalized_user_input)
+        
+        if emotional_response:
+            return jsonify({"response": emotional_response})
+        
+        # Encontre a melhor correspondência na base de perguntas
+        best_match = find_best_match(user_input, knowledge_base["questions"])
+        
+        if best_match:
+            # Recupera a resposta correspondente
+            for q in knowledge_base["questions"]:
+                if normalizar_texto(q["question"]) == best_match:
+                    return jsonify({"response": q["answer"]})
+        
         # Resposta padrão caso não haja correspondência
-        response = "Desculpe, eu não sei a resposta."
+        return jsonify({"response": "Desculpe, não sei a resposta."})
     
-    return jsonify({"response": response})
+    except Exception as e:
+        print(f"Erro no endpoint: {e}")
+        return jsonify({"response": f"Ocorreu um erro: {str(e)}"}), 500
+
+#CADASTRO
 
 @app.route('/cadastro', methods=['GET', 'POST'])
 def cadastro_usuario():

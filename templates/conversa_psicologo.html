@@ -14,12 +14,20 @@
         </div>
         <div class="chat-content" id="chat-content">
           <p class="waiting-message" id="waiting-message">
-            Você será atendido por um de nossos psicólogos em breve. Aguarde enquanto preparamos o atendimento.
+            Você será atendido por um de nossos psicólogos em breve. Aguarde
+            enquanto preparamos o atendimento.
           </p>
         </div>
         <div class="chat-input" id="chat-input">
-          <input type="text" id="user-message" placeholder="Aguarde para iniciar a conversa..." disabled />
-          <button class="send-btn" onclick="sendMessage()" disabled>Enviar</button>
+          <input
+            type="text"
+            id="user-message"
+            placeholder="Aguarde para iniciar a conversa..."
+            disabled
+          />
+          <button class="send-btn" onclick="sendMessage()" disabled>
+            Enviar
+          </button>
         </div>
       </div>
     </div>
@@ -27,15 +35,28 @@
     <footer>
       <div class="footer-content">
         <div class="contact-info">
-          <p>Entre em contato: <a href="mailto:soulspeakfacens@gmail.com">soulspeakfacens@gmail.com</a></p>
+          <p>
+            Entre em contato:
+            <a href="mailto:soulspeakfacens@gmail.com"
+              >soulspeakfacens@gmail.com</a
+            >
+          </p>
         </div>
         <div class="partners">
           <p>Parceiros:</p>
           <a href="https://enlace.facens.br" target="_blank">
-            <img src="static/CSS/imagens/enlace.png" alt="Parceiro ENLACE" class="partner-logo" />
+            <img
+              src="static/CSS/imagens/enlace.png"
+              alt="Parceiro ENLACE"
+              class="partner-logo"
+            />
           </a>
           <a href="https://cvv.org.br" target="_blank">
-            <img src="static/CSS/imagens/cvv.png" alt="Parceiro CVV" class="partner-logo" />
+            <img
+              src="static/CSS/imagens/cvv.png"
+              alt="Parceiro CVV"
+              class="partner-logo"
+            />
           </a>
         </div>
       </div>
@@ -43,53 +64,111 @@
 
     <script>
       const usuario = "Paciente 1";
-      
-      fetch('/entrar_espera', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usuario })
-      });
 
-      // Verifica o status a cada 5 segundos
-      setInterval(() => {
-        fetch('/verificar_status', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ usuario })
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.status === 'em atendimento') {
+      async function entrarNaEspera() {
+        try {
+          await fetch("/entrar_espera", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ usuario }),
+          });
+          console.log("Usuário entrou na lista de espera.");
+        } catch (error) {
+          console.error("Erro ao entrar na lista de espera:", error);
+        }
+      }
+
+      async function verificarStatus() {
+        try {
+          const response = await fetch("/verificar_status", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ usuario }),
+          });
+          const data = await response.json();
+          console.log("Status recebido:", data.status);
+
+          if (data.status === "em atendimento") {
             iniciarChat();
+          } else if (data.status === "finalizado") {
+            finalizarChatUsuario();
           }
-        });
-      }, 5000);
+        } catch (error) {
+          console.error("Erro ao verificar o status:", error);
+        }
+      }
+
+      function finalizarChatUsuario() {
+        document.getElementById(
+          "chat-content"
+        ).innerHTML += `<p class="end-message">O atendimento foi encerrado. Obrigado por usar o SoulSpeak.</p>`;
+        document.getElementById("user-message").disabled = true;
+        document.querySelector(".send-btn").disabled = true;
+
+        // Redirecionar após 3 segundos
+        setTimeout(() => {
+          window.location.href = "/meu_diario";
+        }, 3000);
+      }
 
       function iniciarChat() {
-        document.getElementById('waiting-message').style.display = 'none';
-        document.getElementById('user-message').disabled = false;
-        document.getElementById('user-message').placeholder = "Digite sua mensagem...";
-        document.querySelector('.send-btn').disabled = false;
+        console.log("Iniciando o chat...");
+        document.getElementById("waiting-message").style.display = "none";
+        document.getElementById("user-message").disabled = false;
+        document.getElementById("user-message").placeholder =
+          "Digite sua mensagem...";
+        document.querySelector(".send-btn").disabled = false;
       }
 
-      function sendMessage() {
-        const messageInput = document.getElementById('user-message');
+      async function sendMessage() {
+        const messageInput = document.getElementById("user-message");
         const message = messageInput.value;
 
-        if (message.trim() === '') return;
+        if (message.trim() === "") return;
 
-        document.getElementById('chat-content').innerHTML += `<div class="user-message"><strong>Você:</strong> ${message}</div>`;
-        messageInput.value = '';
+        document.getElementById(
+          "chat-content"
+        ).innerHTML += `<div class="user-message"><strong>Você:</strong> ${message}</div>`;
+        messageInput.value = "";
 
-        fetch('/enviar_mensagem', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ usuario, message })
-        }).then(response => response.json())
-          .then(data => {
-            document.getElementById('chat-content').innerHTML += `<div class="psicologo-message"><strong>Psicólogo:</strong> ${data.resposta}</div>`;
+        try {
+          await fetch("/enviar_mensagem", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ usuario, message, sender: "Paciente" }),
           });
+          console.log("Mensagem enviada:", message);
+        } catch (error) {
+          console.error("Erro ao enviar mensagem:", error);
+        }
       }
+
+      async function carregarMensagens() {
+        try {
+          const response = await fetch(`/mensagens_chat/${usuario}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          });
+          const data = await response.json();
+
+          const chatContent = document.getElementById("chat-content");
+          chatContent.innerHTML = "";
+
+          data.mensagens.forEach((mensagem) => {
+            const sender =
+              mensagem.sender === "Psicólogo" ? "Psicólogo" : "Você";
+            chatContent.innerHTML += `<div class="message"><strong>${sender}:</strong> ${mensagem.message}</div>`;
+          });
+        } catch (error) {
+          console.error("Erro ao carregar mensagens:", error);
+        }
+      }
+
+      entrarNaEspera();
+
+      // Ajustar os intervalos para garantir a atualização correta
+      setInterval(carregarMensagens, 3000);
+      setInterval(verificarStatus, 2000);
     </script>
   </body>
 </html>
