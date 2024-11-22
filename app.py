@@ -266,12 +266,34 @@ def base():
 def admin_dashboard():
     conectar = connect_db()
     cursor = conectar.cursor()
+
     # Busca psicólogos pendentes
     cursor.execute("SELECT * FROM analise_psicologo WHERE status = 'pendente'")
     psicologos_pendentes = cursor.fetchall()
+
+    # Dados para gráficos (Exemplo com valores padrão)
+    cursor.execute("SELECT status, COUNT(*) FROM analise_psicologo GROUP BY status")
+    status_data = cursor.fetchall()
+    status_labels = [row[0] for row in status_data] or ['Pendentes', 'Aprovados', 'Rejeitados']
+    status_values = [row[1] for row in status_data] or [10, 5, 2]
+
+    cursor.execute("""
+        SELECT COUNT(CASE WHEN tipo_usuario = 'usuario' THEN 1 END),
+               COUNT(CASE WHEN tipo_usuario = 'psicologo' THEN 1 END)
+        FROM usuarios
+    """)
+    user_data = cursor.fetchone()
+    user_counts = user_data or [50, 20]  # Exemplo de valores padrão
+
     conectar.close()
-    # Renderiza a página com os psicólogos pendentes
-    return render_template('admin.html', psicologos=psicologos_pendentes)
+
+    # Renderiza a página com os dados
+    return render_template(
+        'admin.html',
+        psicologos=psicologos_pendentes,
+        psychologists_status=status_values,
+        users_count=user_counts
+    )
 
 
 @app.route('/ed_emocional')

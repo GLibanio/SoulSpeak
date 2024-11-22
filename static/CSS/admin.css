@@ -1,172 +1,224 @@
- /* Estilização geral */
- body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f9;
-    color: #333;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+/* Estilização geral */
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1 {
-    color: #4a4a4a;
-    margin-bottom: 20px;
-    font-size: 2em;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 2.2em;
+  text-align: center;
 }
 
 /* Estilização da tabela */
 table {
-    width: 80%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+  width: 90%;
+  max-width: 1200px;
+  border-collapse: collapse;
+  margin: 20px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
-th, td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 th {
-    background-color: #4a90e2;
-    color: #fff;
-    font-weight: bold;
-    text-transform: uppercase;
+  background-color: #007acc;
+  color: #ffffff;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
 td {
-    color: #555;
+  color: #555;
+}
+
+tr:hover td {
+  background-color: #f1f8ff;
+  transition: background-color 0.2s ease;
 }
 
 /* Links de ação */
 a {
-    color: #4a90e2;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 8px 12px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
+  color: #007acc;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
 }
 
 a:hover {
-    background-color: #4a90e2;
-    color: #fff;
+  background-color: #007acc;
+  color: #fff;
+}
+
+/* Botões */
+button {
+  font-family: inherit;
+  font-size: 1em;
+  padding: 8px 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.logout-btn:hover {
+  background-color: #e63939;
+}
+
+.approve-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.approve-btn:hover {
+  background-color: #43a047;
+}
+
+.reject-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.reject-btn:hover {
+  background-color: #d32f2f;
 }
 
 /* Estilos para o rodapé */
 footer {
-    margin-top: 30px;
-    font-size: 0.8em;
-    color: #888;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f9fafc;
+  color: #333;
+  font-size: 0.9em;
+  text-align: center;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo do botão de Logout */
-.logout-btn {
-    background-color: #ff4d4d;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+footer .footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
 }
 
-.logout-btn:hover {
-    background-color: #ff1a1a;
+footer a {
+  color: #007acc;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-/* Estilo dos botões de Aprovar e Reprovar */
-.approve-btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-right: 5px;
+footer a:hover {
+  text-decoration: underline;
 }
 
-.approve-btn:hover {
-    background-color: #45a049;
+/* Parcerias e contato */
+.partners img {
+  width: 80px;
+  margin: 10px;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
 }
 
-.reject-btn {
-    background-color: #f44336;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+.partners img:hover {
+  filter: grayscale(0);
+  transform: scale(1.1);
 }
 
-.reject-btn:hover {
-    background-color: #d32f2f;
+.contact-info {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
 }
 
-footer {
-    background-color: #f8f9fa;
-    padding: 20px;
-    text-align: center;
-    font-family: 'Exo', sans-serif;
+.contact-info a {
+  color: #0066cc;
+  font-weight: bold;
+}
+
+.contact-info a:hover {
+  color: #004999;
+  text-decoration: underline;
+}
+
+/* Gráficos */
+.charts-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.charts-container h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: #2c3e50;
+  text-align: center;
+}
+
+.charts-wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  height: 300px;
+}
+
+canvas {
+  max-width: 45%;
+  aspect-ratio: 1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  table {
+    width: 100%;
   }
-  
-  .footer-content {
-    display: flex;
+
+  th,
+  td {
+    font-size: 0.9em;
+    padding: 10px;
+  }
+
+  .charts-wrapper {
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    flex-wrap:nowrap;
+    height: auto;
   }
-  
-  .partners p {
-    margin: 0;
-    color: #333;
+
+  canvas {
+    max-width: 90%;
   }
-  
-  .partner-logo {
-    width: 100px;
-    margin: 10px;
-  }
-  
-  .partner-logo:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
-  
-  .contact-info {
-    background-color: #ffffff;
-    padding: 15px 25px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .contact-info p {
-    margin: 0;
-    font-size: 1.1em;
-    font-weight: 500;
-    color: #333;
-  }
-  
-  .contact-info a {
-    color: #0066cc;
-    font-weight: 600;
-    text-decoration: none;
-  }
-  
-  .contact-info a:hover {
-    color: #004999;
-    text-decoration: underline;
-    transition: color 0.3s ease;
-  }
-  
-  .contact-info::before {
-    content: "📧"; /* Ícone de e-mail */
-    font-size: 1.3em;
-    margin-right: 8px;
-  }
-  
+}

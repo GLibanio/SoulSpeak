@@ -1,110 +1,105 @@
 * {
-  margin: 0px;
-  padding: 0px;
-  border: 0px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
 }
+
 body {
   background-image: url(imagens/planodefundo.png);
+  background-size: cover;
+  background-position: center;
   background-attachment: fixed;
   font-family: "Exo", sans-serif;
+  overflow-x: hidden; /* Evita rolagem lateral */
 }
 
 header {
-  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: auto; /* Ajusta dinamicamente conforme o conteúdo */
   width: 100%;
+  padding: 10px 20px;
   background-color: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
   display: flex;
-  justify-content: left;
   align-items: center;
-  padding: 0 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.header-title {
-  font-family: "Exo", system-ui;
-  color: black;
-  font-size: 36px;
-}
-
-.header-logo {
-  height: 60px;
-  width: 60px;
-  align-self: center;
-  margin-left: 10px;
-  margin-right: 20px;
+  gap: 10px;
 }
 
 .header-logo img {
-  height: 100%;
-  width: 100%;
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
 }
 
-.menu {
-  display: inline-flex;
-  margin-left: auto;
+.header-title {
+  font-size: 28px;
+  color: black;
+  white-space: nowrap; /* Impede quebra do título */
 }
 
-.btn_menu {
-  cursor: pointer;
-  font-size: 18px;
-  margin-right: 40px;
-  background-color: white;
-  border: 3px black;
-  border-radius: 25px;
+.main-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: justify; /* Melhor alinhamento do texto */
+  line-height: 1.6;
 }
 
-.exo-title {
-  font-family: "Exo", system-ui;
-  font-weight: 400;
-  font-style: normal;
+h1, h2, h3 {
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
 }
 
 footer {
   background-color: #f8f9fa;
   padding: 20px;
   text-align: center;
-  font-family: 'Exo', sans-serif;
+  border-top: 2px solid #eaeaea;
 }
 
 .footer-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
-.partners p {
-  margin: 0;
-  color: #333;
+.partners {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .partner-logo {
-  width: 100px;
-  margin: 10px;
+  width: 60px;
+  transition: transform 0.3s ease;
 }
 
 .partner-logo:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
+  transform: scale(1.1);
 }
 
 .contact-info {
   background-color: #ffffff;
-  padding: 15px 25px;
+  padding: 15px 20px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .contact-info p {
   margin: 0;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: 500;
   color: #333;
 }
@@ -118,12 +113,6 @@ footer {
 .contact-info a:hover {
   color: #004999;
   text-decoration: underline;
-  transition: color 0.3s ease;
 }
 
-.contact-info::before {
-  content: "📧"; /* Ícone de e-mail */
-  font-size: 1.3em;
-  margin-right: 8px;
-}
 

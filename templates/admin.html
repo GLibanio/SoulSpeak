@@ -21,25 +21,43 @@
             </tr>
         </thead>
         <tbody id="psychologists-list">
-            {% for psico in psicologos %}
-            <tr data-id="{{ psico[0] }}">
-                <td>{{ psico[1] }}</td>
-                <td>{{ psico[5] }}</td>
-                <td>{{ psico[2] }}</td>
-                <td>
-                    <button class="approve-btn" onclick="alterarStatus('{{ url_for('aprovar_psicologo', id=psico[0]) }}', this)">Aprovar</button>
-                    <button class="reject-btn" onclick="alterarStatus('{{ url_for('reprovar_psicologo', id=psico[0]) }}', this)">Reprovar</button>
-                </td>
-            </tr>
-            {% endfor %}
+            {% if psicologos %}
+                {% for psico in psicologos %}
+                <tr data-id="{{ psico[0] }}">
+                    <td>{{ psico[1] }}</td>
+                    <td>{{ psico[5] }}</td>
+                    <td>{{ psico[2] }}</td>
+                    <td>
+                        <button class="approve-btn" onclick="alterarStatus('{{ url_for('aprovar_psicologo', id=psico[0]) }}', this)">Aprovar</button>
+                        <button class="reject-btn" onclick="alterarStatus('{{ url_for('reprovar_psicologo', id=psico[0]) }}', this)">Reprovar</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">Nenhum psicólogo pendente</td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 
+    <div class="charts-container">
+        <h2>Estatísticas do Sistema</h2>
+        <div class="charts-wrapper">
+            <canvas id="psychologistsStatusChart"></canvas>
+            <canvas id="usersCountChart"></canvas>
+        </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        // Função de logout
         function logout() {
             window.location.href = "{{ url_for('login') }}";
         }
 
+        // Função para alterar status
         function alterarStatus(url, button) {
             fetch(url, {
                 method: 'POST',
@@ -61,6 +79,57 @@
                 alert('Erro ao enviar a solicitação.');
             });
         }
+
+        // Dados simulados (Exemplo para quando o Flask não enviar os dados)
+        const psychologistsStatusData = {{ psychologists_status | safe }} || [10, 5, 2];
+        const usersCountData = {{ users_count | safe }} || [50, 20];
+
+        // Gráfico de Status dos Psicólogos
+        const ctx1 = document.getElementById('psychologistsStatusChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Pendentes', 'Aprovados', 'Rejeitados'],
+                datasets: [{
+                    label: 'Status dos Psicólogos',
+                    data: psychologistsStatusData,
+                    backgroundColor: ['#FFCC00', '#00CC66', '#FF3333'], // Cores
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // Gráfico de Contagem de Usuários
+        const ctx2 = document.getElementById('usersCountChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Usuários Comuns', 'Psicólogos'],
+                datasets: [{
+                    label: 'Número de Usuários',
+                    data: usersCountData,
+                    backgroundColor: ['#007BFF', '#FF5733'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
     </script>
 </body>
 </html>
