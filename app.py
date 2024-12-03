@@ -260,7 +260,7 @@ def page_not_found(e):
 
 @app.route('/')
 def base():
-    return render_template('index.html')
+    return render_template('landingPage.html')
 
 @app.route('/admin')
 def admin_dashboard():
@@ -328,6 +328,10 @@ def home():
 @app.route('/index')
 def index():
     return render_template('index.html')
+
+@app.route('/about')
+def landing():
+    return render_template('landingPage.html')
 
 @app.route('/indicacoes')
 def indicacoes():
